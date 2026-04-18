@@ -1,4 +1,5 @@
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, useEffect } from "react";
+import { FaPlus, FaChevronLeft, FaChevronRight, FaTimes } from "react-icons/fa";
 import { useAuth } from "../contexts/AuthContext";
 
 const REACTIONS = [
@@ -11,7 +12,7 @@ const REACTIONS = [
 
 function cx(...parts) {
   return parts.filter(Boolean).join(" ");
-}
+//
 
 function uid() {
   return `${Date.now()}-${Math.random().toString(16).slice(2)}`;
@@ -23,7 +24,195 @@ function ReactionButtonLabel({ reactionId }) {
   return `${reaction.emoji} ${reaction.label}`;
 }
 
-export default function Feed() {
+  // --- Stories Data ---
+  const userStory = {
+    id: 0,
+    name: "You",
+    avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+    image: "https://picsum.photos/seed/you/400/700",
+    isUser: true,
+  };
+  const stories = [
+    userStory,
+    {
+      id: 1,
+      name: "Shubham",
+      avatar: "https://randomuser.me/api/portraits/men/45.jpg",
+      image: "https://picsum.photos/seed/shubham/400/700",
+    },
+    {
+      id: 2,
+      name: "Priya",
+      avatar: "https://randomuser.me/api/portraits/women/67.jpg",
+      image: "https://picsum.photos/seed/priya/400/700",
+    },
+    {
+      id: 3,
+      name: "Amit",
+      avatar: "https://randomuser.me/api/portraits/men/23.jpg",
+      image: "https://picsum.photos/seed/amit/400/700",
+    },
+    {
+      id: 4,
+      name: "Anjali",
+      avatar: "https://randomuser.me/api/portraits/women/34.jpg",
+      image: "https://picsum.photos/seed/anjali/400/700",
+    },
+    {
+      id: 5,
+      name: "Rohit",
+      avatar: "https://randomuser.me/api/portraits/men/78.jpg",
+      image: "https://picsum.photos/seed/rohit/400/700",
+    },
+    {
+      id: 6,
+      name: "Sneha",
+      avatar: "https://randomuser.me/api/portraits/women/91.jpg",
+      image: "https://picsum.photos/seed/sneha/400/700",
+    },
+  ];
+
+  // --- Stories Modal State ---
+  const [storyModalOpen, setStoryModalOpen] = useState(false);
+  const [activeStoryIdx, setActiveStoryIdx] = useState(0);
+  const [progress, setProgress] = useState(0);
+
+  // Open story modal
+  const openStory = (idx) => {
+    setActiveStoryIdx(idx);
+    setProgress(0);
+    setStoryModalOpen(true);
+  };
+
+  // Progress bar and auto-advance
+  useEffect(() => {
+    if (!storyModalOpen) return;
+    setProgress(0);
+    const interval = setInterval(() => {
+      setProgress((p) => {
+        if (p >= 100) {
+          // Auto-advance
+          if (activeStoryIdx < stories.length - 1) {
+            setActiveStoryIdx((idx) => idx + 1);
+            return 0;
+          } else {
+            setStoryModalOpen(false);
+            return 0;
+          }
+        }
+        return p + 2;
+      });
+    }, 100);
+    return () => clearInterval(interval);
+    // eslint-disable-next-line
+  }, [storyModalOpen, activeStoryIdx]);
+
+  // --- Stories Bar Component ---
+  const StoriesBar = () => (
+    <div className="flex items-center space-x-4 overflow-x-auto py-4 px-2 bg-white rounded-lg shadow mb-6 scrollbar-thin scrollbar-thumb-gray-300">
+      {stories.map((story, idx) => (
+        <div key={story.id} className="flex flex-col items-center">
+          <button
+            className={`relative w-16 h-16 flex items-center justify-center rounded-full border-4 ${
+              story.isUser
+                ? "border-gray-300 hover:border-blue-400"
+                : "border-blue-500 hover:border-blue-700"
+            } bg-white shadow group`}
+            onClick={() => !story.isUser ? openStory(idx) : null}
+          >
+            {story.isUser ? (
+              <span className="absolute inset-0 flex items-center justify-center">
+                <FaPlus className="text-blue-500 text-2xl" />
+              </span>
+            ) : null}
+            <img
+              src={story.avatar}
+              alt={story.name}
+              className={`w-14 h-14 rounded-full object-cover ${
+                story.isUser ? "opacity-60" : ""
+              }`}
+            />
+          </button>
+          <span className="mt-2 text-xs text-gray-700 font-medium">
+            {story.isUser ? "Create" : story.name}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+
+  // --- Stories Modal Viewer ---
+  const StoryModal = () => {
+    const story = stories[activeStoryIdx];
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90">
+        <div className="absolute top-4 right-4">
+          <button
+            className="text-white text-2xl p-2 hover:bg-gray-800 rounded-full"
+            onClick={() => setStoryModalOpen(false)}
+          >
+            <FaTimes />
+          </button>
+        </div>
+        <div className="relative w-full max-w-md mx-auto flex flex-col items-center">
+          {/* Progress bar */}
+          <div className="w-full h-1 bg-gray-700 rounded mt-8 mb-2">
+            <div
+              className="h-1 bg-blue-500 rounded transition-all"
+              style={{ width: `${progress}%` }}
+            ></div>
+          </div>
+          {/* Top bar */}
+          <div className="flex items-center w-full px-4 py-2">
+            <img
+              src={story.avatar}
+              alt={story.name}
+              className="w-10 h-10 rounded-full border-2 border-blue-400 mr-3"
+            />
+            <div className="flex-1">
+              <div className="text-white font-semibold">{story.name}</div>
+              <div className="text-xs text-gray-300">2h ago</div>
+            </div>
+          </div>
+          {/* Story image */}
+          <div className="flex-1 flex items-center justify-center w-full">
+            <img
+              src={story.image}
+              alt="story"
+              className="max-h-[70vh] w-auto rounded-lg shadow-lg"
+            />
+          </div>
+          {/* Navigation arrows */}
+          <div className="absolute left-2 top-1/2 -translate-y-1/2">
+            {activeStoryIdx > 0 && (
+              <button
+                className="text-white bg-gray-800 bg-opacity-60 hover:bg-opacity-90 rounded-full p-2"
+                onClick={() => {
+                  setActiveStoryIdx((idx) => idx - 1);
+                  setProgress(0);
+                }}
+              >
+                <FaChevronLeft />
+              </button>
+            )}
+          </div>
+          <div className="absolute right-2 top-1/2 -translate-y-1/2">
+            {activeStoryIdx < stories.length - 1 && (
+              <button
+                className="text-white bg-gray-800 bg-opacity-60 hover:bg-opacity-90 rounded-full p-2"
+                onClick={() => {
+                  setActiveStoryIdx((idx) => idx + 1);
+                  setProgress(0);
+                }}
+              >
+                <FaChevronRight />
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  };
   const { currentUser } = useAuth();
 
   const viewer = useMemo(
@@ -266,6 +455,10 @@ export default function Feed() {
         </aside>
 
         <section className="lg:col-span-6 space-y-4">
+          {/* --- Stories Bar --- */}
+          <StoriesBar />
+          {/* --- Stories Modal Viewer --- */}
+          {storyModalOpen && <StoryModal />}
           <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
             <div className="flex items-start gap-3">
               <img src={viewer.avatar} alt={viewer.name} className="w-12 h-12 rounded-full" />

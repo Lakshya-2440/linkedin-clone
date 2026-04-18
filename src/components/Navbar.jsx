@@ -1,4 +1,6 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
+import { useNotification } from "../contexts/NotificationContext";
+import { FaBell } from "react-icons/fa";
 import { useAuth } from "../contexts/AuthContext";
 
 const navItems = [
@@ -11,6 +13,7 @@ const navItems = [
 
 export default function Navbar() {
   const { currentUser } = useAuth();
+  const { unreadCount } = useNotification ? useNotification() : { unreadCount: 0 };
   const location = useLocation();
 
   return (
@@ -73,6 +76,15 @@ export default function Navbar() {
               <li><button className="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">View Profile</button></li>
               <li><button className="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Sign Out</button></li>
             </ul>
+            <Link to="/notifications" className="relative text-gray-700 hover:text-blue-600 font-medium flex items-center">
+              <FaBell className="text-lg" />
+              {unreadCount > 0 && (
+                <span className="absolute -top-1 -right-2 bg-blue-600 text-white text-xs rounded-full px-1.5 py-0.5 min-w-[18px] text-center">
+                  {unreadCount}
+                </span>
+              )}
+              <span className="ml-1">Notifications</span>
+            </Link>
           </div>
         </div>
         {/* Work grid icon */}
