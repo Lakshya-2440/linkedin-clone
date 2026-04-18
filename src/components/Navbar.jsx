@@ -64,13 +64,13 @@ export default function Navbar() {
       <div className="flex items-center gap-2 md:gap-4 ml-2">
         {/* Me dropdown */}
         <div className="relative group">
-          <img src={currentUser.avatar} alt="Me" className="w-8 h-8 rounded-full border-2 border-gray-200 dark:border-gray-700" />
+          <img src={currentUser?.avatar || 'https://i.pravatar.cc/150?img=12'} alt="Me" className="w-8 h-8 rounded-full border-2 border-gray-200 dark:border-gray-700" />
           <span className="hidden md:inline ml-1 text-xs font-medium">Me</span>
           {/* Dropdown placeholder */}
           <div className="hidden group-hover:block absolute right-0 mt-2 w-40 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded shadow-lg z-10">
             <div className="p-3 border-b border-gray-100 dark:border-gray-700">
-              <div className="font-semibold">{currentUser.name}</div>
-              <div className="text-xs text-gray-500">{currentUser.headline}</div>
+              <div className="font-semibold">{currentUser?.name}</div>
+              <div className="text-xs text-gray-500">{currentUser?.headline}</div>
             </div>
             <ul>
               <li><button className="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">View Profile</button></li>

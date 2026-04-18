@@ -12,7 +12,7 @@ const REACTIONS = [
 
 function cx(...parts) {
   return parts.filter(Boolean).join(" ");
-//
+}
 
 function uid() {
   return `${Date.now()}-${Math.random().toString(16).slice(2)}`;
@@ -24,6 +24,7 @@ function ReactionButtonLabel({ reactionId }) {
   return `${reaction.emoji} ${reaction.label}`;
 }
 
+export default function Feed() {
   // --- Stories Data ---
   const userStory = {
     id: 0,

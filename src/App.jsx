@@ -1,5 +1,6 @@
 import { BrowserRouter, useLocation } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
+import { ProfileProvider } from "./contexts/ProfileContext";
 import Navbar from "./components/Navbar";
 import AppRoutes from "./routes/AppRoutes";
 
@@ -19,9 +20,11 @@ function AppLayout() {
 export default function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <AppLayout />
-      </BrowserRouter>
+      <ProfileProvider>
+        <BrowserRouter>
+          <AppLayout />
+        </BrowserRouter>
+      </ProfileProvider>
     </AuthProvider>
   );
 }
