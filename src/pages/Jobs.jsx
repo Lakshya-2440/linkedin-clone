@@ -17,6 +17,7 @@ import {
   Users,
   Zap,
 } from "lucide-react";
+import useMediaQuery from "../hooks/useMediaQuery.js";
 
 /* ═══════════════════════════════════════════════════════════════════════════ */
 /*                              STATIC DATA                                     */
@@ -339,8 +340,10 @@ const USER_PREFERENCES = {
 /*                              MAIN COMPONENT                                  */
 /* ═══════════════════════════════════════════════════════════════════════════ */
 export default function Jobs() {
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
   // State management
   const [selectedJob, setSelectedJob] = useState(JOBS_DATA[0]);
+  const [mobileDetailOpen, setMobileDetailOpen] = useState(false);
   const [savedJobs, setSavedJobs] = useState(new Set([3, 6]));
   const [appliedJobs, setAppliedJobs] = useState(new Set([2]));
   const [jobAlerts, setJobAlerts] = useState({
@@ -413,11 +416,11 @@ export default function Jobs() {
       {/* LEFT SIDEBAR */}
       <aside className="lg:sticky lg:top-20 h-fit space-y-4">
         {/* Job Alerts */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-          <div className="p-4 border-b border-gray-200">
+        <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+          <div className="p-4 border-b border-gray-200 dark:border-gray-700">
             <div className="flex items-center gap-2">
               <Bell className="w-5 h-5 text-blue-600" />
-              <h2 className="text-base font-semibold text-gray-900">
+              <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100">
                 Job alerts
               </h2>
             </div>
@@ -441,7 +444,7 @@ export default function Jobs() {
         </div>
 
         {/* Saved & Applied Jobs */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
           <nav className="p-2">
             <SidebarRow
               icon={Bookmark}
@@ -459,11 +462,11 @@ export default function Jobs() {
         </div>
 
         {/* My Preferences */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-          <div className="p-4 border-b border-gray-200">
+        <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+          <div className="p-4 border-b border-gray-200 dark:border-gray-700">
             <div className="flex items-center gap-2">
-              <Settings className="w-5 h-5 text-gray-600" />
-              <h2 className="text-base font-semibold text-gray-900">
+              <Settings className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+              <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100">
                 My preferences
               </h2>
             </div>
@@ -477,7 +480,7 @@ export default function Jobs() {
                 {USER_PREFERENCES.jobTitles.map((title) => (
                   <span
                     key={title}
-                    className="px-2 py-1 bg-blue-50 text-blue-700 text-xs rounded-md"
+                    className="px-2 py-1 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-200 text-xs rounded-md"
                   >
                     {title}
                   </span>
@@ -492,7 +495,7 @@ export default function Jobs() {
                 {USER_PREFERENCES.locations.map((loc) => (
                   <span
                     key={loc}
-                    className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-md"
+                    className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-100 text-xs rounded-md"
                   >
                     {loc}
                   </span>
@@ -507,7 +510,7 @@ export default function Jobs() {
                 {USER_PREFERENCES.jobTypes.map((type) => (
                   <span
                     key={type}
-                    className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-md"
+                    className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-100 text-xs rounded-md"
                   >
                     {type}
                   </span>
@@ -521,7 +524,7 @@ export default function Jobs() {
       {/* MAIN CONTENT */}
       <main className="flex flex-col gap-4">
         {/* Search Bar */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
+        <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4">
           <div className="flex flex-col sm:flex-row gap-3">
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -530,7 +533,7 @@ export default function Jobs() {
                 placeholder="Search jobs or companies"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
               />
             </div>
             <div className="flex-1 relative">
@@ -540,7 +543,7 @@ export default function Jobs() {
                 placeholder="Location"
                 value={locationQuery}
                 onChange={(e) => setLocationQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
               />
             </div>
             <button className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors">
@@ -585,10 +588,10 @@ export default function Jobs() {
 
         {/* Job Listings Header */}
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-gray-900">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
             Top job picks for you
           </h2>
-          <span className="text-sm text-gray-500">
+          <span className="text-sm text-gray-500 dark:text-gray-300">
             {JOBS_DATA.length} results
           </span>
         </div>
@@ -604,7 +607,10 @@ export default function Jobs() {
                 isSelected={selectedJob.id === job.id}
                 isSaved={savedJobs.has(job.id)}
                 isApplied={appliedJobs.has(job.id)}
-                onClick={() => setSelectedJob(job)}
+                onClick={() => {
+                  setSelectedJob(job);
+                  if (!isDesktop) setMobileDetailOpen(true);
+                }}
                 onToggleSave={() => toggleSaveJob(job.id)}
               />
             ))}
@@ -627,6 +633,38 @@ export default function Jobs() {
           </div>
         </div>
       </main>
+
+      {/* Mobile Job Detail Overlay */}
+      {!isDesktop && mobileDetailOpen && selectedJob && (
+        <div className="fixed inset-0 z-[90] bg-gray-50 dark:bg-gray-900">
+          <div className="sticky top-0 z-[95] bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 px-4 py-3 flex items-center justify-between">
+            <button
+              type="button"
+              onClick={() => setMobileDetailOpen(false)}
+              className="w-10 h-10 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 flex items-center justify-center"
+              aria-label="Back"
+            >
+              <ChevronRight className="w-5 h-5 rotate-180 text-gray-700 dark:text-gray-100" />
+            </button>
+            <div className="font-semibold text-gray-900 dark:text-gray-100 truncate">
+              {selectedJob.title}
+            </div>
+            <div className="w-10 h-10" />
+          </div>
+          <div className="px-4 py-4 overflow-y-auto h-[calc(100vh-56px)]">
+            <JobDetailPanel
+              job={selectedJob}
+              isSaved={savedJobs.has(selectedJob.id)}
+              isApplied={appliedJobs.has(selectedJob.id)}
+              matchPercentage={matchPercentage}
+              skillsExpanded={skillsExpanded}
+              onToggleSkills={() => setSkillsExpanded(!skillsExpanded)}
+              onToggleSave={() => toggleSaveJob(selectedJob.id)}
+              onEasyApply={() => setShowEasyApply(true)}
+            />
+          </div>
+        </div>
+      )}
 
       {/* Easy Apply Modal */}
       {showEasyApply && (
@@ -666,7 +704,7 @@ export default function Jobs() {
 function ToggleRow({ label, checked, onChange }) {
   return (
     <div className="flex items-center justify-between">
-      <span className="text-sm text-gray-700">{label}</span>
+      <span className="text-sm text-gray-700 dark:text-gray-100">{label}</span>
       <button
         onClick={onChange}
         className={`relative w-11 h-6 rounded-full transition-colors ${
@@ -689,14 +727,14 @@ function SidebarRow({ icon: Icon, label, count, active }) {
       className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm transition-colors ${
         active
           ? "bg-blue-50 text-blue-700"
-          : "text-gray-700 hover:bg-gray-50"
+          : "text-gray-700 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800"
       }`}
     >
       <div className="flex items-center gap-3">
         <Icon className="w-5 h-5" />
         <span>{label}</span>
       </div>
-      <span className="text-gray-400">{count}</span>
+      <span className="text-gray-400 dark:text-gray-400">{count}</span>
     </button>
   );
 }
@@ -708,7 +746,7 @@ function FilterChip({ label, value, options, onChange }) {
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-1 px-3 py-1.5 border border-gray-300 rounded-full text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+        className="flex items-center gap-1 px-3 py-1.5 border border-gray-300 dark:border-gray-700 rounded-full text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
       >
         {label}
         <ChevronDown className="w-4 h-4" />
@@ -719,7 +757,7 @@ function FilterChip({ label, value, options, onChange }) {
             className="fixed inset-0 z-10"
             onClick={() => setIsOpen(false)}
           />
-          <div className="absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg py-1 min-w-[150px] z-20">
+          <div className="absolute top-full left-0 mt-1 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg py-1 min-w-[150px] z-20">
             {options.map((option) => (
               <button
                 key={option}
@@ -730,7 +768,7 @@ function FilterChip({ label, value, options, onChange }) {
                 className={`w-full px-4 py-2 text-left text-sm hover:bg-gray-50 ${
                   value === option.toLowerCase()
                     ? "text-blue-600 font-medium"
-                    : "text-gray-700"
+                    : "text-gray-700 dark:text-gray-100"
                 }`}
               >
                 {option}
@@ -747,10 +785,10 @@ function JobCard({ job, isSelected, isSaved, isApplied, onClick, onToggleSave })
   return (
     <div
       onClick={onClick}
-      className={`bg-white border rounded-xl p-4 cursor-pointer transition-all ${
+      className={`bg-white dark:bg-gray-900 border dark:border-gray-700 rounded-xl p-4 cursor-pointer transition-all ${
         isSelected
           ? "border-blue-500 ring-2 ring-blue-100"
-          : "border-gray-200 hover:border-gray-300"
+          : "border-gray-200 hover:border-gray-300 dark:hover:border-gray-600"
       }`}
     >
       <div className="flex gap-4">
@@ -765,18 +803,18 @@ function JobCard({ job, isSelected, isSaved, isApplied, onClick, onToggleSave })
           {/* Job Title */}
           <h3
             className={`font-semibold text-base mb-1 ${
-              isApplied ? "text-gray-500" : "text-blue-600"
+              isApplied ? "text-gray-500 dark:text-gray-300" : "text-blue-600"
             }`}
           >
             {job.title}
             {job.promoted && (
-              <span className="ml-2 text-xs text-gray-500">Promoted</span>
+              <span className="ml-2 text-xs text-gray-500 dark:text-gray-300">Promoted</span>
             )}
           </h3>
 
           {/* Company & Location */}
-          <p className="text-sm text-gray-700">{job.company}</p>
-          <p className="text-sm text-gray-500">{job.location}</p>
+          <p className="text-sm text-gray-700 dark:text-gray-100">{job.company}</p>
+          <p className="text-sm text-gray-500 dark:text-gray-300">{job.location}</p>
 
           {/* Posted Time & Applicants */}
           <div className="flex items-center gap-2 mt-2 text-xs text-gray-500">
@@ -815,7 +853,7 @@ function JobCard({ job, isSelected, isSaved, isApplied, onClick, onToggleSave })
             e.stopPropagation();
             onToggleSave();
           }}
-          className="p-2 rounded-full hover:bg-gray-100 transition-colors shrink-0"
+          className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors shrink-0"
         >
           <Bookmark
             className={`w-5 h-5 ${
@@ -826,7 +864,7 @@ function JobCard({ job, isSelected, isSaved, isApplied, onClick, onToggleSave })
       </div>
 
       {isApplied && (
-        <div className="mt-3 pt-3 border-t border-gray-100 flex items-center gap-2 text-sm text-green-600">
+        <div className="mt-3 pt-3 border-t border-gray-100 dark:border-gray-800 flex items-center gap-2 text-sm text-green-600">
           <CheckCircle className="w-4 h-4" />
           <span>Applied</span>
         </div>
@@ -848,9 +886,9 @@ function JobDetailPanel({
   const visibleSkills = skillsExpanded ? job.skills : job.skills.slice(0, 4);
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+    <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
       {/* Header */}
-      <div className="p-6 border-b border-gray-200">
+      <div className="p-6 border-b border-gray-200 dark:border-gray-700">
         <div className="flex gap-4">
           <div
             className={`w-16 h-16 ${job.logoColor} rounded-xl flex items-center justify-center text-white font-bold text-2xl shrink-0`}
@@ -858,9 +896,9 @@ function JobDetailPanel({
             {job.logo}
           </div>
           <div className="flex-1">
-            <h2 className="text-xl font-semibold text-gray-900">{job.title}</h2>
-            <p className="text-gray-700">{job.company}</p>
-            <p className="text-gray-500 text-sm">{job.location}</p>
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">{job.title}</h2>
+            <p className="text-gray-700 dark:text-gray-100">{job.company}</p>
+            <p className="text-gray-500 dark:text-gray-300 text-sm">{job.location}</p>
           </div>
         </div>
 
@@ -902,13 +940,13 @@ function JobDetailPanel({
       </div>
 
       {/* Match Percentage */}
-      <div className="px-6 py-4 border-b border-gray-200">
+      <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="font-semibold text-gray-900">
+            <h3 className="font-semibold text-gray-900 dark:text-gray-100">
               See how you compare
             </h3>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-500 dark:text-gray-300">
               {matchPercentage}% skills match
             </p>
           </div>
@@ -932,7 +970,7 @@ function JobDetailPanel({
                 strokeWidth="3"
               />
             </svg>
-            <span className="absolute inset-0 flex items-center justify-center text-sm font-bold text-gray-900">
+            <span className="absolute inset-0 flex items-center justify-center text-sm font-bold text-gray-900 dark:text-gray-100">
               {matchPercentage}%
             </span>
           </div>
@@ -940,21 +978,21 @@ function JobDetailPanel({
       </div>
 
       {/* About the Job */}
-      <div className="px-6 py-4 border-b border-gray-200">
-        <h3 className="font-semibold text-gray-900 mb-3">About the job</h3>
-        <div className="text-sm text-gray-600 leading-relaxed whitespace-pre-line max-h-48 overflow-y-auto">
+      <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+        <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-3">About the job</h3>
+        <div className="text-sm text-gray-600 dark:text-gray-200 leading-relaxed whitespace-pre-line max-h-48 overflow-y-auto">
           {job.description}
         </div>
       </div>
 
       {/* Skills */}
-      <div className="px-6 py-4 border-b border-gray-200">
-        <h3 className="font-semibold text-gray-900 mb-3">Skills</h3>
+      <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+        <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-3">Skills</h3>
         <div className="flex flex-wrap gap-2">
           {visibleSkills.map((skill) => (
             <span
               key={skill}
-              className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full"
+              className="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-100 text-sm rounded-full"
             >
               {skill}
             </span>
@@ -972,7 +1010,7 @@ function JobDetailPanel({
 
       {/* Meet the Hiring Team */}
       <div className="px-6 py-4">
-        <h3 className="font-semibold text-gray-900 mb-3">
+        <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-3">
           Meet the hiring team
         </h3>
         <div className="flex items-center gap-3">
@@ -982,8 +1020,8 @@ function JobDetailPanel({
             className="w-12 h-12 rounded-full object-cover"
           />
           <div>
-            <p className="font-medium text-gray-900">{job.recruiter.name}</p>
-            <p className="text-sm text-gray-500">{job.recruiter.role}</p>
+            <p className="font-medium text-gray-900 dark:text-gray-100">{job.recruiter.name}</p>
+            <p className="text-sm text-gray-500 dark:text-gray-300">{job.recruiter.role}</p>
           </div>
         </div>
       </div>
@@ -1013,30 +1051,30 @@ function EasyApplyModal({
       />
 
       {/* Modal */}
-      <div className="relative bg-white rounded-xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto animate-slideUp">
+      <div className="relative bg-white dark:bg-gray-900 rounded-xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto animate-slideUp border border-gray-200 dark:border-gray-700">
         {/* Header */}
-        <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between z-10">
+        <div className="sticky top-0 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 px-6 py-4 flex items-center justify-between z-10">
           <div>
-            <h2 className="text-lg font-semibold text-gray-900">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
               Apply to {job.company}
             </h2>
-            <p className="text-sm text-gray-500">{job.title}</p>
+            <p className="text-sm text-gray-500 dark:text-gray-300">{job.title}</p>
           </div>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
           >
             <X className="w-5 h-5 text-gray-500" />
           </button>
         </div>
 
         {/* Progress Bar */}
-        <div className="px-6 py-4 border-b border-gray-200">
+        <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between text-sm mb-2">
-            <span className="font-medium text-gray-700">
+            <span className="font-medium text-gray-700 dark:text-gray-100">
               Step {step} of {totalSteps}
             </span>
-            <span className="text-gray-500">
+            <span className="text-gray-500 dark:text-gray-300">
               {step === 1 && "Contact info"}
               {step === 2 && "Resume"}
               {step === 3 && "Screening questions"}
@@ -1197,14 +1235,14 @@ function EasyApplyModal({
         </div>
 
         {/* Footer */}
-        <div className="sticky bottom-0 bg-white border-t border-gray-200 px-6 py-4 flex items-center justify-between">
+        <div className="sticky bottom-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 px-6 py-4 flex items-center justify-between">
           <button
             onClick={onBack}
             disabled={step === 1}
             className={`px-4 py-2 text-sm font-semibold rounded-full transition-colors ${
               step === 1
                 ? "text-gray-400 cursor-not-allowed"
-                : "text-gray-700 hover:bg-gray-100"
+                : "text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800"
             }`}
           >
             Back

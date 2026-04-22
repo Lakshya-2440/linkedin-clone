@@ -1,6 +1,7 @@
 import { useMemo, useRef, useState, useEffect } from "react";
 import { FaPlus, FaChevronLeft, FaChevronRight, FaTimes } from "react-icons/fa";
 import { useAuth } from "../contexts/AuthContext";
+import { useLocation } from "react-router-dom";
 
 const REACTIONS = [
   { id: "like", label: "Like", emoji: "👍" },
@@ -25,6 +26,7 @@ function ReactionButtonLabel({ reactionId }) {
 }
 
 export default function Feed() {
+  const location = useLocation();
   // --- Stories Data ---
   const userStory = {
     id: 0,
@@ -110,7 +112,7 @@ export default function Feed() {
 
   // --- Stories Bar Component ---
   const StoriesBar = () => (
-    <div className="flex items-center space-x-4 overflow-x-auto py-4 px-2 bg-white rounded-lg shadow mb-6 scrollbar-thin scrollbar-thumb-gray-300">
+    <div className="flex items-center space-x-4 overflow-x-auto py-4 px-2 bg-white dark:bg-gray-900 rounded-lg shadow mb-6 scrollbar-thin scrollbar-thumb-gray-300 border border-gray-200 dark:border-gray-700">
       {stories.map((story, idx) => (
         <div key={story.id} className="flex flex-col items-center">
           <button
@@ -134,7 +136,7 @@ export default function Feed() {
               }`}
             />
           </button>
-          <span className="mt-2 text-xs text-gray-700 font-medium">
+          <span className="mt-2 text-xs text-gray-700 dark:text-gray-200 font-medium">
             {story.isUser ? "Create" : story.name}
           </span>
         </div>
@@ -292,6 +294,15 @@ export default function Feed() {
 
   const canPost = postDraft.trim().length > 0 && postDraft.length <= 3000;
 
+  // Open composer when navigated from the mobile "+" tab
+  useEffect(() => {
+    if (location?.state?.compose) {
+      setIsModalOpen(true);
+      window.history.replaceState({}, document.title);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location?.state]);
+
   const closeModal = () => {
     setIsModalOpen(false);
     setPostDraft("");
@@ -431,7 +442,7 @@ export default function Feed() {
   };
 
   return (
-    <div className="mx-auto max-w-6xl px-4 pb-10">
+    <div className="mx-auto max-w-6xl px-3 sm:px-4 pb-10">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         <aside className="hidden lg:block lg:col-span-3">
           <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
@@ -471,7 +482,7 @@ export default function Feed() {
                 Start a post
               </button>
             </div>
-            <div className="mt-3 grid grid-cols-4 gap-2 text-sm">
+            <div className="hidden sm:grid mt-3 grid-cols-4 gap-2 text-sm">
               {[
                 { label: "Photo", color: "text-blue-600", icon: "🖼️" },
                 { label: "Video", color: "text-green-600", icon: "🎥" },

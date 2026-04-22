@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useProfile } from "../contexts/ProfileContext";
 import SlideInModal from "../components/SlideInModal";
@@ -53,7 +53,7 @@ function ConnectionDegreeBadge({ userId }) {
   // Simple logic: user 2 is 2nd degree, user 3 is 3rd+
   const degree = userId === "2" ? "2nd" : "3rd+";
   return (
-    <span className="inline-flex items-center gap-1 text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">
+    <span className="inline-flex items-center gap-1 text-xs text-gray-500 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 px-2 py-0.5 rounded-full">
       <Users className="w-3 h-3" />
       {degree}
     </span>
@@ -63,7 +63,7 @@ function ConnectionDegreeBadge({ userId }) {
 /* ───────────────────── helper: dropdown menu ───────────────────── */
 function DropdownMenu({ trigger, items }) {
   const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useState(null);
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -79,7 +79,7 @@ function DropdownMenu({ trigger, items }) {
     <div className="relative" ref={dropdownRef}>
       <div onClick={() => setIsOpen(!isOpen)}>{trigger}</div>
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-50">
+        <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1 z-50">
           {items.map((item, idx) => (
             <button
               key={idx}
@@ -87,7 +87,7 @@ function DropdownMenu({ trigger, items }) {
                 item.onClick();
                 setIsOpen(false);
               }}
-              className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2"
+              className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 flex items-center gap-2"
             >
               {item.icon}
               {item.label}
@@ -253,9 +253,9 @@ function CoverIntroSection({
   userId,
 }) {
   return (
-    <section className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+    <section className="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
       {/* Cover */}
-      <div className="relative h-48 sm:h-56 overflow-hidden">
+      <div className="relative h-36 sm:h-56 overflow-hidden">
         <img
           src={profile.coverPhoto}
           alt="Cover"
@@ -265,7 +265,7 @@ function CoverIntroSection({
       </div>
 
       {/* Avatar + Buttons Row */}
-      <div className="relative px-6 pb-4">
+      <div className="relative px-4 sm:px-6 pb-4">
         {/* Avatar */}
         <div className="-mt-16 sm:-mt-20 mb-3 relative inline-block">
           <img
@@ -283,18 +283,18 @@ function CoverIntroSection({
         </div>
 
         {/* Action Buttons (top right, relative to card) */}
-        <div className="absolute top-4 right-4 flex gap-2">
+        <div className="mt-3 sm:mt-0 sm:absolute sm:top-4 sm:right-4 flex gap-2 overflow-x-auto pb-1">
           {isOwnProfile ? (
             <>
               <button
                 onClick={() => openModal("editIntro")}
-                className="bg-white/90 hover:bg-white px-4 py-1.5 rounded-full text-sm font-semibold text-gray-700 border border-gray-300 shadow-sm transition-all hover:shadow"
+                className="shrink-0 bg-white/90 dark:bg-gray-900/80 hover:bg-white dark:hover:bg-gray-900 px-4 py-1.5 rounded-full text-sm font-semibold text-gray-700 dark:text-gray-100 border border-gray-300 dark:border-gray-700 shadow-sm transition-all hover:shadow"
               >
                 <Pencil className="w-4 h-4 inline mr-1" />
                 Edit profile
               </button>
-              <button className="bg-white/90 hover:bg-white p-2 rounded-full border border-gray-300 shadow-sm transition-all hover:shadow">
-                <MoreHorizontal className="w-4 h-4 text-gray-700" />
+              <button className="shrink-0 bg-white/90 dark:bg-gray-900/80 hover:bg-white dark:hover:bg-gray-900 p-2 rounded-full border border-gray-300 dark:border-gray-700 shadow-sm transition-all hover:shadow">
+                <MoreHorizontal className="w-4 h-4 text-gray-700 dark:text-gray-100" />
               </button>
             </>
           ) : (
@@ -303,7 +303,7 @@ function CoverIntroSection({
               {connectionStatus === "pending" ? (
                 <button
                   onClick={onWithdraw}
-                  className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-1.5 rounded-full text-sm font-semibold border border-gray-300 transition-colors flex items-center gap-1"
+                  className="shrink-0 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-100 px-4 py-1.5 rounded-full text-sm font-semibold border border-gray-300 dark:border-gray-700 transition-colors flex items-center gap-1"
                 >
                   <Check className="w-4 h-4" />
                   Pending
@@ -311,7 +311,7 @@ function CoverIntroSection({
               ) : (
                 <button
                   onClick={onConnect}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 rounded-full text-sm font-semibold transition-colors flex items-center gap-1"
+                  className="shrink-0 bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 rounded-full text-sm font-semibold transition-colors flex items-center gap-1"
                 >
                   <UserPlus className="w-4 h-4" />
                   Connect
@@ -319,14 +319,14 @@ function CoverIntroSection({
               )}
               <button
                 onClick={onMessage}
-                className="border border-blue-600 text-blue-600 hover:bg-blue-50 px-4 py-1.5 rounded-full text-sm font-semibold transition-colors flex items-center gap-1"
+                className="shrink-0 border border-blue-600 text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 px-4 py-1.5 rounded-full text-sm font-semibold transition-colors flex items-center gap-1"
               >
                 <MessageSquare className="w-4 h-4" />
                 Message
               </button>
               <DropdownMenu
                 trigger={
-                  <button className="border border-gray-400 text-gray-600 hover:bg-gray-50 p-2 rounded-full transition-colors">
+                  <button className="shrink-0 border border-gray-400 dark:border-gray-600 text-gray-600 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800 p-2 rounded-full transition-colors">
                     <MoreHorizontal className="w-4 h-4" />
                   </button>
                 }
@@ -343,7 +343,7 @@ function CoverIntroSection({
         {/* Name, headline, location */}
         <div className="mt-1">
           <div className="flex items-center gap-2 flex-wrap">
-            <h1 className="text-2xl font-bold text-gray-900">
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
               {profile.name}
             </h1>
             {!isOwnProfile && userId && <ConnectionDegreeBadge userId={userId} />}
@@ -353,8 +353,8 @@ function CoverIntroSection({
               </span>
             )}
           </div>
-          <p className="text-base text-gray-700 mt-0.5">{profile.headline}</p>
-          <div className="flex items-center gap-1 mt-1 text-sm text-gray-500">
+          <p className="text-base text-gray-700 dark:text-gray-200 mt-0.5">{profile.headline}</p>
+          <div className="flex items-center gap-1 mt-1 text-sm text-gray-500 dark:text-gray-300">
             <MapPin className="w-3.5 h-3.5" />
             <span>{profile.location}</span>
             <span className="mx-1">·</span>

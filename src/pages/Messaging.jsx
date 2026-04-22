@@ -17,6 +17,7 @@ import {
   CheckCheck,
   Clock,
 } from "lucide-react";
+import useMediaQuery from "../hooks/useMediaQuery.js";
 
 /* ═══════════════════════════════════════════════════════════════════════════ */
 /*                              STATIC DATA                                     */
@@ -385,9 +386,11 @@ const EMOJI_OPTIONS = ["👍", "❤️", "😂", "😮", "🎉", "🔥"];
 /*                              MAIN COMPONENT                                  */
 /* ═══════════════════════════════════════════════════════════════════════════ */
 export default function Messaging() {
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
   // State
   const [conversations, setConversations] = useState(CONTACTS_DATA);
   const [activeConversationId, setActiveConversationId] = useState(1);
+  const [mobileChatOpen, setMobileChatOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState("focused"); // "focused" | "other"
   const [messageInput, setMessageInput] = useState("");
@@ -595,26 +598,32 @@ export default function Messaging() {
     setActiveConversationId(contact.id);
     setShowComposeModal(false);
     setComposeSearch("");
+    setMobileChatOpen(true);
   };
 
   return (
-    <div className="fixed inset-0 top-16 bg-gray-100 flex">
+    <div className="mx-auto max-w-[1128px] px-0 sm:px-4">
+      <div className="bg-gray-100 dark:bg-gray-900 sm:rounded-xl sm:border sm:border-gray-200 sm:dark:border-gray-700 overflow-hidden flex h-[calc(100vh-128px)] sm:h-[calc(100vh-120px)]">
       {/* LEFT PANEL */}
-      <aside className="w-full lg:w-[35%] bg-white border-r border-gray-200 flex flex-col">
+      <aside
+        className={`w-full lg:w-[35%] bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 flex flex-col ${
+          !isDesktop && mobileChatOpen ? "hidden" : ""
+        }`}
+      >
         {/* Header */}
-        <div className="p-4 border-b border-gray-200 flex items-center justify-between">
-          <h1 className="text-xl font-semibold text-gray-900">Messaging</h1>
+        <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
+          <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Messaging</h1>
           <button
             onClick={() => setShowComposeModal(true)}
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
             title="New message"
           >
-            <Edit3 className="w-5 h-5 text-gray-600" />
+            <Edit3 className="w-5 h-5 text-gray-600 dark:text-gray-300" />
           </button>
         </div>
 
         {/* Search */}
-        <div className="p-3 border-b border-gray-200">
+        <div className="p-3 border-b border-gray-200 dark:border-gray-700">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
             <input
@@ -622,19 +631,19 @@ export default function Messaging() {
               placeholder="Search messages"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 bg-gray-100 border border-transparent rounded-lg text-sm focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all"
+              className="w-full pl-9 pr-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 border border-transparent rounded-lg text-sm focus:bg-white dark:focus:bg-gray-800 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all"
             />
           </div>
         </div>
 
         {/* Tabs */}
-        <div className="flex border-b border-gray-200">
+        <div className="flex border-b border-gray-200 dark:border-gray-700">
           <button
             onClick={() => setActiveTab("focused")}
             className={`flex-1 py-3 text-sm font-medium transition-colors ${
               activeTab === "focused"
                 ? "text-blue-600 border-b-2 border-blue-600"
-                : "text-gray-500 hover:text-gray-700"
+                : "text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-100"
             }`}
           >
             Focused
@@ -644,7 +653,7 @@ export default function Messaging() {
             className={`flex-1 py-3 text-sm font-medium transition-colors ${
               activeTab === "other"
                 ? "text-blue-600 border-b-2 border-blue-600"
-                : "text-gray-500 hover:text-gray-700"
+                : "text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-100"
             }`}
           >
             Other
@@ -656,11 +665,14 @@ export default function Messaging() {
           {filteredConversations.map((conv) => (
             <div
               key={conv.id}
-              onClick={() => setActiveConversationId(conv.id)}
-              className={`p-4 border-b border-gray-100 cursor-pointer transition-colors ${
+              onClick={() => {
+                setActiveConversationId(conv.id);
+                if (!isDesktop) setMobileChatOpen(true);
+              }}
+              className={`p-4 border-b border-gray-100 dark:border-gray-800 cursor-pointer transition-colors ${
                 activeConversationId === conv.id
-                  ? "bg-blue-50 border-l-4 border-l-blue-600"
-                  : "hover:bg-gray-50 border-l-4 border-l-transparent"
+                  ? "bg-blue-50 dark:bg-blue-900/20 border-l-4 border-l-blue-600"
+                  : "hover:bg-gray-50 dark:hover:bg-gray-800 border-l-4 border-l-transparent"
               }`}
             >
               <div className="flex gap-3">
@@ -678,22 +690,22 @@ export default function Messaging() {
 
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between mb-0.5">
-                    <h3 className="font-semibold text-gray-900 truncate">
+                    <h3 className="font-semibold text-gray-900 dark:text-gray-100 truncate">
                       {conv.name}
                     </h3>
                     <span className="text-xs text-gray-500 shrink-0">
                       {formatTime(conv.lastMessage.timestamp)}
                     </span>
                   </div>
-                  <p className="text-xs text-gray-500 truncate mb-1">
+                  <p className="text-xs text-gray-500 dark:text-gray-300 truncate mb-1">
                     {conv.headline}
                   </p>
                   <div className="flex items-center justify-between">
                     <p
                       className={`text-sm truncate ${
                         conv.unreadCount > 0 && !conv.lastMessage.isOwn
-                          ? "text-gray-900 font-medium"
-                          : "text-gray-500"
+                          ? "text-gray-900 dark:text-gray-100 font-medium"
+                          : "text-gray-500 dark:text-gray-300"
                       }`}
                     >
                       {conv.lastMessage.isOwn && "You: "}
@@ -713,12 +725,26 @@ export default function Messaging() {
       </aside>
 
       {/* RIGHT PANEL */}
-      <main className="hidden lg:flex flex-1 flex-col bg-white">
+      <main
+        className={`flex-1 flex flex-col bg-white dark:bg-gray-900 ${
+          isDesktop ? "hidden lg:flex" : mobileChatOpen ? "flex" : "hidden"
+        }`}
+      >
         {activeConversation ? (
           <>
             {/* Chat Header */}
-            <div className="p-4 border-b border-gray-200 flex items-center justify-between">
+            <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
               <div className="flex items-center gap-3">
+                {!isDesktop && (
+                  <button
+                    type="button"
+                    onClick={() => setMobileChatOpen(false)}
+                    className="w-10 h-10 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 flex items-center justify-center text-gray-700 dark:text-gray-100"
+                    aria-label="Back"
+                  >
+                    <ChevronLeft className="w-5 h-5" />
+                  </button>
+                )}
                 <div className="relative">
                   <img
                     src={activeConversation.avatar}
@@ -730,34 +756,34 @@ export default function Messaging() {
                   )}
                 </div>
                 <div>
-                  <h2 className="font-semibold text-gray-900">
+                  <h2 className="font-semibold text-gray-900 dark:text-gray-100">
                     {activeConversation.name}
                   </h2>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-gray-500 dark:text-gray-300">
                     {activeConversation.headline}
                   </p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-                  <Phone className="w-5 h-5 text-gray-600" />
+                <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors">
+                  <Phone className="w-5 h-5 text-gray-600 dark:text-gray-300" />
                 </button>
-                <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-                  <Video className="w-5 h-5 text-gray-600" />
+                <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors">
+                  <Video className="w-5 h-5 text-gray-600 dark:text-gray-300" />
                 </button>
-                <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-                  <Info className="w-5 h-5 text-gray-600" />
+                <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors">
+                  <Info className="w-5 h-5 text-gray-600 dark:text-gray-300" />
                 </button>
               </div>
             </div>
 
             {/* Messages Area */}
-            <div className="flex-1 overflow-y-auto p-4 bg-gray-50">
+            <div className="flex-1 overflow-y-auto p-4 bg-gray-50 dark:bg-gray-950">
               {groupedMessages.map((group, groupIndex) => (
                 <div key={groupIndex}>
                   {/* Date Separator */}
                   <div className="flex justify-center my-4">
-                    <span className="px-3 py-1 bg-gray-200 text-gray-600 text-xs rounded-full">
+                    <span className="px-3 py-1 bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-200 text-xs rounded-full">
                       {group.dateLabel}
                     </span>
                   </div>
@@ -806,7 +832,7 @@ export default function Messaging() {
                             className={`px-4 py-2.5 rounded-2xl ${
                               isOwn
                                 ? "bg-blue-600 text-white rounded-br-md"
-                                : "bg-white text-gray-900 border border-gray-200 rounded-bl-md"
+                                : "bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 border border-gray-200 dark:border-gray-700 rounded-bl-md"
                             }`}
                           >
                             <p className="text-sm">{msg.text}</p>
@@ -822,7 +848,7 @@ export default function Messaging() {
                               {msg.reactions.map((reaction, idx) => (
                                 <span
                                   key={idx}
-                                  className="text-sm bg-white border border-gray-200 rounded-full px-1.5 py-0.5 shadow-sm"
+                                  className="text-sm bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-full px-1.5 py-0.5 shadow-sm"
                                 >
                                   {reaction}
                                 </span>
@@ -903,20 +929,20 @@ export default function Messaging() {
             </div>
 
             {/* Message Input Area */}
-            <div className="p-4 border-t border-gray-200 bg-white">
+            <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
               {/* Toolbar */}
               <div className="flex items-center gap-2 mb-3">
-                <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-                  <Paperclip className="w-5 h-5 text-gray-500" />
+                <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors">
+                  <Paperclip className="w-5 h-5 text-gray-500 dark:text-gray-300" />
                 </button>
-                <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-                  <Image className="w-5 h-5 text-gray-500" />
+                <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors">
+                  <Image className="w-5 h-5 text-gray-500 dark:text-gray-300" />
                 </button>
-                <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-                  <FileText className="w-5 h-5 text-gray-500" />
+                <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors">
+                  <FileText className="w-5 h-5 text-gray-500 dark:text-gray-300" />
                 </button>
-                <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-                  <Smile className="w-5 h-5 text-gray-500" />
+                <button className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors">
+                  <Smile className="w-5 h-5 text-gray-500 dark:text-gray-300" />
                 </button>
               </div>
 
@@ -929,7 +955,7 @@ export default function Messaging() {
                   onKeyDown={handleKeyDown}
                   placeholder="Write a message..."
                   rows={1}
-                  className="flex-1 resize-none border border-gray-300 rounded-2xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all min-h-[44px] max-h-[120px]"
+                  className="flex-1 resize-none border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 rounded-2xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all min-h-[44px] max-h-[120px]"
                   style={{ height: "auto" }}
                   onInput={(e) => {
                     e.target.style.height = "auto";
@@ -954,7 +980,7 @@ export default function Messaging() {
             </div>
           </>
         ) : (
-          <div className="flex-1 flex items-center justify-center bg-gray-50">
+          <div className="flex-1 flex items-center justify-center bg-gray-50 dark:bg-gray-950">
             <div className="text-center">
               <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Send className="w-8 h-8 text-gray-400" />
@@ -977,10 +1003,10 @@ export default function Messaging() {
               setComposeSearch("");
             }}
           />
-          <div className="relative bg-white rounded-xl shadow-2xl w-full max-w-md max-h-[80vh] flex flex-col animate-slideUp">
+          <div className="relative bg-white dark:bg-gray-900 rounded-xl shadow-2xl w-full max-w-md max-h-[80vh] flex flex-col animate-slideUp border border-gray-200 dark:border-gray-700">
             {/* Header */}
-            <div className="p-4 border-b border-gray-200 flex items-center justify-between">
-              <h2 className="text-lg font-semibold text-gray-900">
+            <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
                 New message
               </h2>
               <button
@@ -988,14 +1014,14 @@ export default function Messaging() {
                   setShowComposeModal(false);
                   setComposeSearch("");
                 }}
-                className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
               >
                 <X className="w-5 h-5 text-gray-500" />
               </button>
             </div>
 
             {/* Search */}
-            <div className="p-4 border-b border-gray-200">
+            <div className="p-4 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center gap-3">
                 <span className="text-sm text-gray-500">To:</span>
                 <input
@@ -1003,7 +1029,7 @@ export default function Messaging() {
                   placeholder="Type a name"
                   value={composeSearch}
                   onChange={(e) => setComposeSearch(e.target.value)}
-                  className="flex-1 text-sm outline-none"
+                  className="flex-1 text-sm outline-none bg-transparent text-gray-900 dark:text-gray-100 placeholder:text-gray-400"
                   autoFocus
                 />
               </div>
@@ -1017,7 +1043,7 @@ export default function Messaging() {
                     <button
                       key={contact.id}
                       onClick={() => startConversation(contact)}
-                      className="w-full p-4 flex items-center gap-3 hover:bg-gray-50 transition-colors text-left"
+                      className="w-full p-4 flex items-center gap-3 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-left"
                     >
                       <img
                         src={contact.avatar}
@@ -1025,17 +1051,17 @@ export default function Messaging() {
                         className="w-10 h-10 rounded-full object-cover"
                       />
                       <div>
-                        <p className="font-medium text-gray-900">
+                        <p className="font-medium text-gray-900 dark:text-gray-100">
                           {contact.name}
                         </p>
-                        <p className="text-xs text-gray-500">
+                        <p className="text-xs text-gray-500 dark:text-gray-300">
                           {contact.headline}
                         </p>
                       </div>
                     </button>
                   ))
                 ) : (
-                  <div className="p-4 text-center text-gray-500">
+                  <div className="p-4 text-center text-gray-500 dark:text-gray-300">
                     No contacts found
                   </div>
                 )
@@ -1048,7 +1074,7 @@ export default function Messaging() {
                     <button
                       key={contact.id}
                       onClick={() => startConversation(contact)}
-                      className="w-full p-3 flex items-center gap-3 hover:bg-gray-50 transition-colors text-left rounded-lg"
+                      className="w-full p-3 flex items-center gap-3 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-left rounded-lg"
                     >
                       <img
                         src={contact.avatar}
@@ -1056,10 +1082,10 @@ export default function Messaging() {
                         className="w-10 h-10 rounded-full object-cover"
                       />
                       <div>
-                        <p className="font-medium text-gray-900">
+                        <p className="font-medium text-gray-900 dark:text-gray-100">
                           {contact.name}
                         </p>
-                        <p className="text-xs text-gray-500">
+                        <p className="text-xs text-gray-500 dark:text-gray-300">
                           {contact.headline}
                         </p>
                       </div>
@@ -1071,6 +1097,7 @@ export default function Messaging() {
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 }
