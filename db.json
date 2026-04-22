@@ -1,0 +1,1056 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Alex Johnson",
+      "headline": "Senior Frontend Developer at TechCorp",
+      "avatar": "https://i.pravatar.cc/150?img=11",
+      "banner": "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800",
+      "location": "San Francisco, CA",
+      "about": "Passionate about building scalable web applications with React and modern JavaScript. Love contributing to open source.",
+      "email": "alex.j@example.com",
+      "phone": "+1 (555) 123-4567",
+      "openToWork": true,
+      "connections": 312,
+      "skills": [
+        { "id": 1, "name": "React", "endorsements": 42 },
+        { "id": 2, "name": "JavaScript", "endorsements": 38 },
+        { "id": 3, "name": "TypeScript", "endorsements": 35 },
+        { "id": 4, "name": "Node.js", "endorsements": 28 }
+      ],
+      "premium": false
+    },
+    {
+      "id": 2,
+      "name": "Sarah Chen",
+      "headline": "Product Manager at Google",
+      "avatar": "https://i.pravatar.cc/150?img=5",
+      "banner": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+      "location": "New York, NY",
+      "about": "Product leader with 8+ years experience building consumer and enterprise products. Ex-McKinsey.",
+      "email": "sarah.c@example.com",
+      "phone": "+1 (555) 234-5678",
+      "openToWork": false,
+      "connections": 587,
+      "skills": [
+        { "id": 1, "name": "Product Strategy", "endorsements": 52 },
+        { "id": 2, "name": "Agile", "endorsements": 45 },
+        { "id": 3, "name": "Data Analysis", "endorsements": 38 }
+      ],
+      "premium": true
+    },
+    {
+      "id": 3,
+      "name": "Michael Park",
+      "headline": "Full Stack Engineer at StartupX",
+      "avatar": "https://i.pravatar.cc/150?img=3",
+      "banner": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800",
+      "location": "Austin, TX",
+      "about": "Building the future of fintech. TypeScript enthusiast. Always learning.",
+      "email": "m.park@example.com",
+      "phone": "+1 (555) 345-6789",
+      "openToWork": false,
+      "connections": 198,
+      "skills": [
+        { "id": 1, "name": "TypeScript", "endorsements": 31 },
+        { "id": 2, "name": "Python", "endorsements": 27 },
+        { "id": 3, "name": "AWS", "endorsements": 24 }
+      ],
+      "premium": false
+    },
+    {
+      "id": 4,
+      "name": "Emma Wilson",
+      "headline": "UX Designer at Adobe",
+      "avatar": "https://i.pravatar.cc/150?img=9",
+      "banner": "https://images.unsplash.com/photo-1557683316-973673baf926?w=800",
+      "location": "Los Angeles, CA",
+      "about": "Creating beautiful, intuitive user experiences. Design systems advocate.",
+      "email": "emma.w@example.com",
+      "phone": "+1 (555) 456-7890",
+      "openToWork": true,
+      "connections": 423,
+      "skills": [
+        { "id": 1, "name": "Figma", "endorsements": 48 },
+        { "id": 2, "name": "UI Design", "endorsements": 45 },
+        { "id": 3, "name": "User Research", "endorsements": 36 }
+      ],
+      "premium": true
+    },
+    {
+      "id": 5,
+      "name": "David Kumar",
+      "headline": "Data Scientist at Meta",
+      "avatar": "https://i.pravatar.cc/150?img=8",
+      "banner": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800",
+      "location": "Seattle, WA",
+      "about": "Machine learning researcher focused on NLP and recommendation systems.",
+      "email": "d.kumar@example.com",
+      "phone": "+1 (555) 567-8901",
+      "openToWork": false,
+      "connections": 256,
+      "skills": [
+        { "id": 1, "name": "Machine Learning", "endorsements": 41 },
+        { "id": 2, "name": "Python", "endorsements": 39 },
+        { "id": 3, "name": "TensorFlow", "endorsements": 33 }
+      ],
+      "premium": false
+    },
+    {
+      "id": 6,
+      "name": "Lisa Thompson",
+      "headline": "Engineering Manager at Microsoft",
+      "avatar": "https://i.pravatar.cc/150?img=1",
+      "banner": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800",
+      "location": "Chicago, IL",
+      "about": "Leading high-performing engineering teams. Passionate about mentorship and building inclusive cultures.",
+      "email": "lisa.t@example.com",
+      "phone": "+1 (555) 678-9012",
+      "openToWork": false,
+      "connections": 712,
+      "skills": [
+        { "id": 1, "name": "Leadership", "endorsements": 56 },
+        { "id": 2, "name": "Agile", "endorsements": 49 },
+        { "id": 3, "name": "System Design", "endorsements": 42 }
+      ],
+      "premium": true
+    },
+    {
+      "id": 7,
+      "name": "James Rodriguez",
+      "headline": "DevOps Engineer at AWS",
+      "avatar": "https://i.pravatar.cc/150?img=12",
+      "banner": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800",
+      "location": "Denver, CO",
+      "about": "Infrastructure as code advocate. Kubernetes expert. Cloud native enthusiast.",
+      "email": "j.rodriguez@example.com",
+      "phone": "+1 (555) 789-0123",
+      "openToWork": false,
+      "connections": 234,
+      "skills": [
+        { "id": 1, "name": "Kubernetes", "endorsements": 38 },
+        { "id": 2, "name": "Docker", "endorsements": 35 },
+        { "id": 3, "name": "AWS", "endorsements": 41 }
+      ],
+      "premium": false
+    },
+    {
+      "id": 8,
+      "name": "Priya Sharma",
+      "headline": "Software Engineer at Netflix",
+      "avatar": "https://i.pravatar.cc/150?img=5",
+      "banner": "https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=800",
+      "location": "San Jose, CA",
+      "about": "Streaming video at scale. Performance optimization nerd. Open source contributor.",
+      "email": "priya.s@example.com",
+      "phone": "+1 (555) 890-1234",
+      "openToWork": false,
+      "connections": 389,
+      "skills": [
+        { "id": 1, "name": "Java", "endorsements": 44 },
+        { "id": 2, "name": "Spring Boot", "endorsements": 37 },
+        { "id": 3, "name": "Microservices", "endorsements": 35 }
+      ],
+      "premium": true
+    },
+    {
+      "id": 9,
+      "name": "Tom Anderson",
+      "headline": "Founder at TechStartup",
+      "avatar": "https://i.pravatar.cc/150?img=13",
+      "banner": "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=800",
+      "location": "Miami, FL",
+      "about": "Serial entrepreneur. Previously at Y Combinator. Building the future of AI.",
+      "email": "tom.a@example.com",
+      "phone": "+1 (555) 901-2345",
+      "openToWork": false,
+      "connections": 892,
+      "skills": [
+        { "id": 1, "name": "Entrepreneurship", "endorsements": 62 },
+        { "id": 2, "name": "Fundraising", "endorsements": 48 },
+        { "id": 3, "name": "Strategy", "endorsements": 45 }
+      ],
+      "premium": true
+    },
+    {
+      "id": 10,
+      "name": "Nina Patel",
+      "headline": "Senior Product Designer at Spotify",
+      "avatar": "https://i.pravatar.cc/150?img=10",
+      "banner": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800",
+      "location": "Boston, MA",
+      "about": "Designing experiences that connect people through music. Design systems expert.",
+      "email": "nina.p@example.com",
+      "phone": "+1 (555) 012-3456",
+      "openToWork": true,
+      "connections": 445,
+      "skills": [
+        { "id": 1, "name": "Figma", "endorsements": 51 },
+        { "id": 2, "name": "Design Systems", "endorsements": 46 },
+        { "id": 3, "name": "Prototyping", "endorsements": 43 }
+      ],
+      "premium": false
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "authorId": 2,
+      "text": "Just wrapped up an amazing product launch! 🚀 It's incredible what a dedicated team can achieve when we align on vision and execution. Looking back at the last 6 months, we've built something truly special. What launch strategies have worked best for your teams?",
+      "image": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800",
+      "createdAt": "2026-04-20T10:00:00Z",
+      "likes": 87,
+      "comments": [
+        {
+          "id": 1,
+          "authorId": 1,
+          "text": "Congratulations Sarah! The product looks amazing!",
+          "createdAt": "2026-04-20T11:30:00Z",
+          "likes": 5
+        },
+        {
+          "id": 2,
+          "authorId": 3,
+          "text": "Well done! Would love to hear more about the technical challenges.",
+          "createdAt": "2026-04-20T12:15:00Z",
+          "likes": 3
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "authorId": 1,
+      "text": "Reflecting on the power of mentorship today. Having someone who believes in you can change everything. 💡 To all the mentors who've guided me - thank you. And to those earlier in their journey: don't be afraid to reach out. People are more willing to help than you think.",
+      "image": null,
+      "createdAt": "2026-04-19T14:30:00Z",
+      "likes": 156,
+      "comments": [
+        {
+          "id": 3,
+          "authorId": 6,
+          "text": "This is so true! Mentorship transformed my career.",
+          "createdAt": "2026-04-19T15:45:00Z",
+          "likes": 12
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "authorId": 5,
+      "text": "Remote work has taught me that discipline > motivation. 🎯 Some days you don't feel like it, but showing up consistently is what separates good from great. What's your secret to staying productive?",
+      "image": null,
+      "createdAt": "2026-04-18T09:00:00Z",
+      "likes": 234,
+      "comments": []
+    },
+    {
+      "id": 4,
+      "authorId": 4,
+      "text": "Designers, let's talk about accessibility. It's not a feature, it's a requirement. Here's a thread on simple ways to make your designs more inclusive 🧵",
+      "image": "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=800",
+      "createdAt": "2026-04-17T16:00:00Z",
+      "likes": 412,
+      "comments": [
+        {
+          "id": 4,
+          "authorId": 10,
+          "text": "Thank you for sharing this! Accessibility is so important.",
+          "createdAt": "2026-04-17T17:20:00Z",
+          "likes": 8
+        },
+        {
+          "id": 5,
+          "authorId": 8,
+          "text": "Great points! Do you have any specific tools you recommend?",
+          "createdAt": "2026-04-17T18:00:00Z",
+          "likes": 5
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "authorId": 6,
+      "text": "Hot take: Your network is your net worth isn't just a cliché - it's reality. 🤝 I've seen more doors open through genuine relationships than perfect resumes. Start conversations, offer value, stay curious.",
+      "image": null,
+      "createdAt": "2026-04-16T11:30:00Z",
+      "likes": 189,
+      "comments": []
+    },
+    {
+      "id": 6,
+      "authorId": 9,
+      "text": "Raised $2M in seed funding today! 🎉 Excited to build the future of AI with an incredible team. This is just the beginning.",
+      "image": null,
+      "createdAt": "2026-04-15T13:00:00Z",
+      "likes": 567,
+      "comments": [
+        {
+          "id": 6,
+          "authorId": 2,
+          "text": "Huge congrats Tom! Rooting for you.",
+          "createdAt": "2026-04-15T13:30:00Z",
+          "likes": 15
+        },
+        {
+          "id": 7,
+          "authorId": 3,
+          "text": "Amazing news! Looking forward to seeing what you build.",
+          "createdAt": "2026-04-15T14:00:00Z",
+          "likes": 10
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "authorId": 7,
+      "text": "Kubernetes tip of the day: Use resource limits wisely. Setting them too low causes OOMKills, too high wastes resources. Here's a simple formula that works for most workloads 👇",
+      "image": "https://images.unsplash.com/photo-1667372393119-c81c0cda748b?w=800",
+      "createdAt": "2026-04-14T10:15:00Z",
+      "likes": 278,
+      "comments": [
+        {
+          "id": 8,
+          "authorId": 3,
+          "text": "Super helpful! Thanks for sharing.",
+          "createdAt": "2026-04-14T11:00:00Z",
+          "likes": 6
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "authorId": 8,
+      "text": "Just published a blog post on optimizing React performance. Covers memoization, code splitting, and lazy loading with real-world examples. Check it out!",
+      "image": null,
+      "createdAt": "2026-04-13T16:45:00Z",
+      "likes": 145,
+      "comments": []
+    },
+    {
+      "id": 9,
+      "authorId": 3,
+      "text": "After 5 years of coding, here's what I wish I knew earlier: 1) Code readability > cleverness 2) Documentation is part of the feature 3) Take breaks to avoid burnout 4) Soft skills matter as much as technical ones 5) Imposter syndrome is normal, don't let it stop you",
+      "image": null,
+      "createdAt": "2026-04-12T09:30:00Z",
+      "likes": 892,
+      "comments": [
+        {
+          "id": 9,
+          "authorId": 1,
+          "text": "Absolutely! Especially #5. We all feel it.",
+          "createdAt": "2026-04-12T10:15:00Z",
+          "likes": 23
+        },
+        {
+          "id": 10,
+          "authorId": 5,
+          "text": "Couldn't agree more. Sharing this with my team.",
+          "createdAt": "2026-04-12T11:00:00Z",
+          "likes": 18
+        },
+        {
+          "id": 11,
+          "authorId": 7,
+          "text": "Print this and frame it. Solid advice!",
+          "createdAt": "2026-04-12T12:30:00Z",
+          "likes": 12
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "authorId": 10,
+      "text": "Design systems are like gardens - they need constant tending. 🌱 Spent the last quarter refining our component library and the ROI has been incredible. Faster prototyping, better consistency, happier developers.",
+      "image": "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800",
+      "createdAt": "2026-04-11T14:20:00Z",
+      "likes": 234,
+      "comments": [
+        {
+          "id": 12,
+          "authorId": 4,
+          "text": "Love the garden metaphor! So true.",
+          "createdAt": "2026-04-11T15:00:00Z",
+          "likes": 7
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "authorId": 2,
+      "text": "Product management is 80% communication, 15% analysis, and 5% firefighting. 📊 The best PMs I know are exceptional at bringing people together and creating clarity from chaos.",
+      "image": null,
+      "createdAt": "2026-04-10T11:00:00Z",
+      "likes": 456,
+      "comments": []
+    },
+    {
+      "id": 12,
+      "authorId": 4,
+      "text": "Color contrast isn't just for WCAG compliance - it's about respecting all users. Here's a quick guide to accessible color palettes that still look amazing 🎨",
+      "image": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=800",
+      "createdAt": "2026-04-09T15:30:00Z",
+      "likes": 312,
+      "comments": [
+        {
+          "id": 13,
+          "authorId": 10,
+          "text": "Bookmarked! Thanks for this.",
+          "createdAt": "2026-04-09T16:15:00Z",
+          "likes": 9
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "authorId": 1,
+      "text": "Finally refactored our legacy codebase to use React hooks. Bundle size down 40%, performance up 30%, developer happiness up 1000%. 🚀 Modern patterns FTW!",
+      "image": null,
+      "createdAt": "2026-04-08T10:00:00Z",
+      "likes": 189,
+      "comments": [
+        {
+          "id": 14,
+          "authorId": 7,
+          "text": "Nice! What was the biggest challenge during migration?",
+          "createdAt": "2026-04-08T11:30:00Z",
+          "likes": 4
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "authorId": 5,
+      "text": "Machine learning isn't magic - it's math. 📐 But when applied thoughtfully, it can solve real problems and create meaningful value. Excited about the future of AI in healthcare.",
+      "image": null,
+      "createdAt": "2026-04-07T13:45:00Z",
+      "likes": 278,
+      "comments": []
+    },
+    {
+      "id": 15,
+      "authorId": 6,
+      "text": "Leading a team through uncertainty requires transparency, empathy, and a steady hand. These past few months have been challenging, but I'm proud of how we've grown together. 💪",
+      "image": null,
+      "createdAt": "2026-04-06T16:00:00Z",
+      "likes": 423,
+      "comments": [
+        {
+          "id": 15,
+          "authorId": 2,
+          "text": "Your team is lucky to have you as a leader.",
+          "createdAt": "2026-04-06T17:30:00Z",
+          "likes": 14
+        },
+        {
+          "id": 16,
+          "authorId": 9,
+          "text": "Leadership is a journey, not a destination. Keep inspiring!",
+          "createdAt": "2026-04-06T18:00:00Z",
+          "likes": 11
+        }
+      ]
+    }
+  ],
+  "jobs": [
+    {
+      "id": 1,
+      "title": "Senior Frontend Developer",
+      "company": "Google",
+      "logo": "G",
+      "logoColor": "bg-blue-500",
+      "location": "Mountain View, CA",
+      "type": "Full-time",
+      "experience": "5+ years",
+      "salary": "$160k - $220k",
+      "postedTime": "2 days ago",
+      "applicants": 45,
+      "easyApply": true,
+      "activelyRecruiting": true,
+      "promoted": true,
+      "description": "We're looking for a Senior Frontend Developer to join our growing team. You will be responsible for building and maintaining user interfaces for our flagship products."
+    },
+    {
+      "id": 2,
+      "title": "Product Manager",
+      "company": "Microsoft",
+      "logo": "M",
+      "logoColor": "bg-green-600",
+      "location": "Redmond, WA",
+      "type": "Full-time",
+      "experience": "3-5 years",
+      "salary": "$140k - $190k",
+      "postedTime": "1 week ago",
+      "applicants": 89,
+      "easyApply": false,
+      "activelyRecruiting": true,
+      "promoted": false,
+      "description": "Join our Azure team as a Product Manager. You'll work on cloud infrastructure products that power millions of businesses worldwide."
+    },
+    {
+      "id": 3,
+      "title": "UX Designer",
+      "company": "Adobe",
+      "logo": "A",
+      "logoColor": "bg-red-600",
+      "location": "San Jose, CA",
+      "type": "Full-time",
+      "experience": "2-4 years",
+      "salary": "$120k - $160k",
+      "postedTime": "3 days ago",
+      "applicants": 32,
+      "easyApply": true,
+      "activelyRecruiting": true,
+      "promoted": true,
+      "description": "Help shape the future of creative tools. We're looking for a UX Designer passionate about building intuitive experiences for creators."
+    },
+    {
+      "id": 4,
+      "title": "Data Scientist",
+      "company": "Netflix",
+      "logo": "N",
+      "logoColor": "bg-red-700",
+      "location": "Los Gatos, CA",
+      "type": "Full-time",
+      "experience": "3+ years",
+      "salary": "$170k - $240k",
+      "postedTime": "5 days ago",
+      "applicants": 67,
+      "easyApply": true,
+      "activelyRecruiting": true,
+      "promoted": false,
+      "description": "Use data to improve the streaming experience for 200M+ users. Work on recommendation algorithms and content strategy."
+    },
+    {
+      "id": 5,
+      "title": "Full Stack Engineer",
+      "company": "Spotify",
+      "logo": "S",
+      "logoColor": "bg-green-500",
+      "location": "New York, NY",
+      "type": "Full-time",
+      "experience": "4+ years",
+      "salary": "$150k - $200k",
+      "postedTime": "1 day ago",
+      "applicants": 23,
+      "easyApply": true,
+      "activelyRecruiting": true,
+      "promoted": true,
+      "description": "Build the future of audio. Join our team working on podcast and audiobook experiences."
+    },
+    {
+      "id": 6,
+      "title": "DevOps Engineer",
+      "company": "Amazon",
+      "logo": "A",
+      "logoColor": "bg-orange-500",
+      "location": "Seattle, WA",
+      "type": "Full-time",
+      "experience": "4+ years",
+      "salary": "$145k - $195k",
+      "postedTime": "4 days ago",
+      "applicants": 54,
+      "easyApply": false,
+      "activelyRecruiting": true,
+      "promoted": false,
+      "description": "Help us scale AWS infrastructure. We're looking for DevOps engineers with deep Kubernetes and cloud experience."
+    },
+    {
+      "id": 7,
+      "title": "Machine Learning Engineer",
+      "company": "Meta",
+      "logo": "M",
+      "logoColor": "bg-blue-600",
+      "location": "Menlo Park, CA",
+      "type": "Full-time",
+      "experience": "3+ years",
+      "salary": "$180k - $250k",
+      "postedTime": "1 week ago",
+      "applicants": 78,
+      "easyApply": true,
+      "activelyRecruiting": true,
+      "promoted": true,
+      "description": "Work on cutting-edge AI research and applications. Focus on NLP and computer vision projects."
+    },
+    {
+      "id": 8,
+      "title": "Backend Engineer",
+      "company": "Stripe",
+      "logo": "S",
+      "logoColor": "bg-purple-600",
+      "location": "San Francisco, CA",
+      "type": "Full-time",
+      "experience": "3-5 years",
+      "salary": "$160k - $220k",
+      "postedTime": "2 weeks ago",
+      "applicants": 91,
+      "easyApply": true,
+      "activelyRecruiting": false,
+      "promoted": false,
+      "description": "Build payment infrastructure used by millions of businesses. Work with distributed systems at scale."
+    },
+    {
+      "id": 9,
+      "title": "iOS Developer",
+      "company": "Apple",
+      "logo": "A",
+      "logoColor": "bg-gray-800",
+      "location": "Cupertino, CA",
+      "type": "Full-time",
+      "experience": "2-5 years",
+      "salary": "$140k - $200k",
+      "postedTime": "3 days ago",
+      "applicants": 41,
+      "easyApply": false,
+      "activelyRecruiting": true,
+      "promoted": true,
+      "description": "Join the team building the next generation of iOS features. Swift expertise required."
+    },
+    {
+      "id": 10,
+      "title": "Technical Lead",
+      "company": "Airbnb",
+      "logo": "A",
+      "logoColor": "bg-rose-500",
+      "location": "Remote",
+      "type": "Full-time",
+      "experience": "5+ years",
+      "salary": "$170k - $230k",
+      "postedTime": "1 week ago",
+      "applicants": 56,
+      "easyApply": true,
+      "activelyRecruiting": true,
+      "promoted": false,
+      "description": "Lead a team of engineers building the future of travel. Balance technical excellence with people management."
+    },
+    {
+      "id": 11,
+      "title": "Security Engineer",
+      "company": "Salesforce",
+      "logo": "S",
+      "logoColor": "bg-sky-600",
+      "location": "San Francisco, CA",
+      "type": "Full-time",
+      "experience": "4+ years",
+      "salary": "$155k - $210k",
+      "postedTime": "4 days ago",
+      "applicants": 38,
+      "easyApply": true,
+      "activelyRecruiting": true,
+      "promoted": false,
+      "description": "Protect customer data across the Salesforce ecosystem. Work on security architecture and threat detection."
+    },
+    {
+      "id": 12,
+      "title": "Staff Engineer",
+      "company": "Uber",
+      "logo": "U",
+      "logoColor": "bg-black",
+      "location": "San Francisco, CA",
+      "type": "Full-time",
+      "experience": "7+ years",
+      "salary": "$200k - $300k",
+      "postedTime": "2 weeks ago",
+      "applicants": 29,
+      "easyApply": false,
+      "activelyRecruiting": true,
+      "promoted": true,
+      "description": "Shape technical strategy for Uber's core platform. Mentor engineers and drive architectural decisions."
+    }
+  ],
+  "notifications": [
+    {
+      "id": 1,
+      "type": "connection_request",
+      "senderId": 2,
+      "message": "Sarah Chen wants to connect with you",
+      "read": false,
+      "createdAt": "2026-04-20T10:00:00Z"
+    },
+    {
+      "id": 2,
+      "type": "post_like",
+      "senderId": 3,
+      "postId": 1,
+      "message": "Michael Park liked your post",
+      "read": false,
+      "createdAt": "2026-04-19T14:30:00Z"
+    },
+    {
+      "id": 3,
+      "type": "comment",
+      "senderId": 4,
+      "postId": 2,
+      "message": "Emma Wilson commented on your post",
+      "read": true,
+      "createdAt": "2026-04-18T09:15:00Z"
+    },
+    {
+      "id": 4,
+      "type": "job_alert",
+      "message": "New jobs matching your preferences: 5 new opportunities",
+      "read": false,
+      "createdAt": "2026-04-17T08:00:00Z"
+    },
+    {
+      "id": 5,
+      "type": "profile_view",
+      "senderId": 5,
+      "message": "David Kumar viewed your profile",
+      "read": true,
+      "createdAt": "2026-04-16T16:45:00Z"
+    },
+    {
+      "id": 6,
+      "type": "post_share",
+      "senderId": 6,
+      "postId": 3,
+      "message": "Lisa Thompson shared your post",
+      "read": false,
+      "createdAt": "2026-04-15T11:20:00Z"
+    },
+    {
+      "id": 7,
+      "type": "connection_accepted",
+      "senderId": 7,
+      "message": "James Rodriguez accepted your connection request",
+      "read": true,
+      "createdAt": "2026-04-14T13:30:00Z"
+    },
+    {
+      "id": 8,
+      "type": "birthday",
+      "senderId": 8,
+      "message": "It's Priya Sharma's birthday today! Send wishes",
+      "read": false,
+      "createdAt": "2026-04-13T00:00:00Z"
+    },
+    {
+      "id": 9,
+      "type": "mention",
+      "senderId": 9,
+      "postId": 5,
+      "message": "Tom Anderson mentioned you in a comment",
+      "read": true,
+      "createdAt": "2026-04-12T15:00:00Z"
+    },
+    {
+      "id": 10,
+      "type": "newsletter",
+      "message": "Weekly LinkedIn News: Top articles for you",
+      "read": false,
+      "createdAt": "2026-04-11T06:00:00Z"
+    }
+  ],
+  "conversations": [
+    {
+      "id": 1,
+      "participantIds": [1, 2],
+      "lastMessageId": 5,
+      "unreadCount": 2,
+      "updatedAt": "2026-04-20T14:30:00Z"
+    },
+    {
+      "id": 2,
+      "participantIds": [1, 3],
+      "lastMessageId": 8,
+      "unreadCount": 0,
+      "updatedAt": "2026-04-19T11:15:00Z"
+    },
+    {
+      "id": 3,
+      "participantIds": [1, 4],
+      "lastMessageId": 12,
+      "unreadCount": 1,
+      "updatedAt": "2026-04-18T16:45:00Z"
+    },
+    {
+      "id": 4,
+      "participantIds": [1, 5, 6],
+      "lastMessageId": 16,
+      "unreadCount": 3,
+      "updatedAt": "2026-04-17T09:20:00Z",
+      "groupName": "Project Alpha Team"
+    },
+    {
+      "id": 5,
+      "participantIds": [1, 7],
+      "lastMessageId": 20,
+      "unreadCount": 0,
+      "updatedAt": "2026-04-16T13:00:00Z"
+    },
+    {
+      "id": 6,
+      "participantIds": [1, 8],
+      "lastMessageId": 24,
+      "unreadCount": 1,
+      "updatedAt": "2026-04-15T10:30:00Z"
+    },
+    {
+      "id": 7,
+      "participantIds": [1, 9],
+      "lastMessageId": 27,
+      "unreadCount": 0,
+      "updatedAt": "2026-04-14T15:45:00Z"
+    },
+    {
+      "id": 8,
+      "participantIds": [1, 10],
+      "lastMessageId": 30,
+      "unreadCount": 2,
+      "updatedAt": "2026-04-13T11:00:00Z"
+    }
+  ],
+  "messages": [
+    {
+      "id": 1,
+      "conversationId": 1,
+      "senderId": 2,
+      "text": "Hey Alex! Thanks for connecting. I've been following your work on React patterns.",
+      "createdAt": "2026-04-20T10:00:00Z",
+      "read": true
+    },
+    {
+      "id": 2,
+      "conversationId": 1,
+      "senderId": 1,
+      "text": "Hi Sarah! Thanks for reaching out. Your PM insights have been super helpful.",
+      "createdAt": "2026-04-20T10:15:00Z",
+      "read": true
+    },
+    {
+      "id": 3,
+      "conversationId": 1,
+      "senderId": 2,
+      "text": "Would love to grab coffee sometime and chat about engineering productivity.",
+      "createdAt": "2026-04-20T11:00:00Z",
+      "read": true
+    },
+    {
+      "id": 4,
+      "conversationId": 1,
+      "senderId": 1,
+      "text": "Absolutely! How about next Tuesday?",
+      "createdAt": "2026-04-20T13:00:00Z",
+      "read": true
+    },
+    {
+      "id": 5,
+      "conversationId": 1,
+      "senderId": 2,
+      "text": "Tuesday works for me. Let's meet at Blue Bottle on Market St?",
+      "createdAt": "2026-04-20T14:30:00Z",
+      "read": false
+    },
+    {
+      "id": 6,
+      "conversationId": 2,
+      "senderId": 3,
+      "text": "Saw your post on mentorship. Really resonated with me!",
+      "createdAt": "2026-04-19T10:00:00Z",
+      "read": true
+    },
+    {
+      "id": 7,
+      "conversationId": 2,
+      "senderId": 1,
+      "text": "Glad you found it helpful! Happy to be a sounding board if you need one.",
+      "createdAt": "2026-04-19T10:30:00Z",
+      "read": true
+    },
+    {
+      "id": 8,
+      "conversationId": 2,
+      "senderId": 3,
+      "text": "I might take you up on that! Working on some career decisions.",
+      "createdAt": "2026-04-19T11:15:00Z",
+      "read": true
+    },
+    {
+      "id": 9,
+      "conversationId": 3,
+      "senderId": 4,
+      "text": "Love your accessibility thread! Could we collaborate on a design systems article?",
+      "createdAt": "2026-04-18T15:00:00Z",
+      "read": true
+    },
+    {
+      "id": 10,
+      "conversationId": 3,
+      "senderId": 1,
+      "text": "That would be amazing! Let's sync up next week.",
+      "createdAt": "2026-04-18T15:30:00Z",
+      "read": true
+    },
+    {
+      "id": 11,
+      "conversationId": 3,
+      "senderId": 4,
+      "text": "Perfect. I'll send over some ideas by Friday.",
+      "createdAt": "2026-04-18T16:00:00Z",
+      "read": true
+    },
+    {
+      "id": 12,
+      "conversationId": 3,
+      "senderId": 4,
+      "text": "Also, I shared your accessibility checklist with my team. Huge hit!",
+      "createdAt": "2026-04-18T16:45:00Z",
+      "read": false
+    },
+    {
+      "id": 13,
+      "conversationId": 4,
+      "senderId": 5,
+      "text": "Team, let's discuss the Q2 roadmap in our next sync.",
+      "createdAt": "2026-04-17T09:00:00Z",
+      "read": true
+    },
+    {
+      "id": 14,
+      "conversationId": 4,
+      "senderId": 1,
+      "text": "Sounds good! I'll prepare the technical spec.",
+      "createdAt": "2026-04-17T09:15:00Z",
+      "read": true
+    },
+    {
+      "id": 15,
+      "conversationId": 4,
+      "senderId": 6,
+      "text": "I'll review the user research findings before the meeting.",
+      "createdAt": "2026-04-17T09:30:00Z",
+      "read": true
+    },
+    {
+      "id": 16,
+      "conversationId": 4,
+      "senderId": 5,
+      "text": "Great coordination everyone! Looking forward to the sync.",
+      "createdAt": "2026-04-17T09:20:00Z",
+      "read": false
+    },
+    {
+      "id": 17,
+      "conversationId": 5,
+      "senderId": 7,
+      "text": "Thanks for the Kubernetes resource limits tip! Saved me hours.",
+      "createdAt": "2026-04-16T12:00:00Z",
+      "read": true
+    },
+    {
+      "id": 18,
+      "conversationId": 5,
+      "senderId": 1,
+      "text": "Happy to help! Let me know if you run into any edge cases.",
+      "createdAt": "2026-04-16T12:30:00Z",
+      "read": true
+    },
+    {
+      "id": 19,
+      "conversationId": 5,
+      "senderId": 7,
+      "text": "Will do. Coffee next week?",
+      "createdAt": "2026-04-16T12:45:00Z",
+      "read": true
+    },
+    {
+      "id": 20,
+      "conversationId": 5,
+      "senderId": 1,
+      "text": "Definitely!",
+      "createdAt": "2026-04-16T13:00:00Z",
+      "read": true
+    },
+    {
+      "id": 21,
+      "conversationId": 6,
+      "senderId": 8,
+      "text": "Hey! Heard you're working on React performance. Want to compare notes?",
+      "createdAt": "2026-04-15T09:30:00Z",
+      "read": true
+    },
+    {
+      "id": 22,
+      "conversationId": 6,
+      "senderId": 1,
+      "text": "Would love to! What areas are you focusing on?",
+      "createdAt": "2026-04-15T10:00:00Z",
+      "read": true
+    },
+    {
+      "id": 23,
+      "conversationId": 6,
+      "senderId": 8,
+      "text": "Mainly bundle optimization and code splitting. Getting some good results.",
+      "createdAt": "2026-04-15T10:15:00Z",
+      "read": true
+    },
+    {
+      "id": 24,
+      "conversationId": 6,
+      "senderId": 8,
+      "text": "Reduced our initial bundle by 60% using dynamic imports!",
+      "createdAt": "2026-04-15T10:30:00Z",
+      "read": false
+    },
+    {
+      "id": 25,
+      "conversationId": 7,
+      "senderId": 9,
+      "text": "Alex! Congrats on the product launch. Would love to hear about the technical challenges.",
+      "createdAt": "2026-04-14T14:00:00Z",
+      "read": true
+    },
+    {
+      "id": 26,
+      "conversationId": 7,
+      "senderId": 1,
+      "text": "Thanks Tom! The scaling part was interesting - happy to share details.",
+      "createdAt": "2026-04-14T15:00:00Z",
+      "read": true
+    },
+    {
+      "id": 27,
+      "conversationId": 7,
+      "senderId": 9,
+      "text": "Perfect. Podcast episode idea? 😄",
+      "createdAt": "2026-04-14T15:45:00Z",
+      "read": true
+    },
+    {
+      "id": 28,
+      "conversationId": 8,
+      "senderId": 10,
+      "text": "Love your design system work! Could I get your thoughts on our component library?",
+      "createdAt": "2026-04-13T09:00:00Z",
+      "read": true
+    },
+    {
+      "id": 29,
+      "conversationId": 8,
+      "senderId": 1,
+      "text": "Absolutely! Send me the Figma link and I'll take a look this weekend.",
+      "createdAt": "2026-04-13T10:00:00Z",
+      "read": true
+    },
+    {
+      "id": 30,
+      "conversationId": 8,
+      "senderId": 10,
+      "text": "You're the best! Here it is: [link]. Really appreciate your time!",
+      "createdAt": "2026-04-13T11:00:00Z",
+      "read": false
+    }
+  ],
+  "connections": [
+    { "id": 1, "userId": 1, "connectedUserId": 2, "status": "accepted", "createdAt": "2026-04-01T00:00:00Z" },
+    { "id": 2, "userId": 1, "connectedUserId": 3, "status": "accepted", "createdAt": "2026-03-15T00:00:00Z" },
+    { "id": 3, "userId": 1, "connectedUserId": 4, "status": "pending", "createdAt": "2026-04-18T00:00:00Z" },
+    { "id": 4, "userId": 1, "connectedUserId": 5, "status": "accepted", "createdAt": "2026-02-20T00:00:00Z" },
+    { "id": 5, "userId": 1, "connectedUserId": 6, "status": "accepted", "createdAt": "2026-03-01T00:00:00Z" },
+    { "id": 6, "userId": 1, "connectedUserId": 7, "status": "accepted", "createdAt": "2026-04-10T00:00:00Z" },
+    { "id": 7, "userId": 1, "connectedUserId": 8, "status": "accepted", "createdAt": "2026-03-20T00:00:00Z" },
+    { "id": 8, "userId": 1, "connectedUserId": 9, "status": "accepted", "createdAt": "2026-01-15T00:00:00Z" },
+    { "id": 9, "userId": 1, "connectedUserId": 10, "status": "pending", "createdAt": "2026-04-19T00:00:00Z" }
+  ]
+}
