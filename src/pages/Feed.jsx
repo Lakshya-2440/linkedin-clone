@@ -1,5 +1,19 @@
 import { useMemo, useRef, useState, useEffect } from "react";
-import { Sparkles, Calendar } from "lucide-react";
+import {
+  Sparkles,
+  Calendar,
+  ChevronDown,
+  Image,
+  Info,
+  MessageCircle,
+  Newspaper,
+  Repeat2,
+  Send,
+  ThumbsUp,
+  Video,
+  Bookmark,
+  BarChart3,
+} from "lucide-react";
 import { useAuth } from "../contexts/AuthContext";
 import { useLocation, Link } from "react-router-dom";
 import { useToast } from "../contexts/ToastContext";
@@ -23,6 +37,18 @@ const REACTIONS = [
   { id: "celebrate", label: "Celebrate", emoji: "👏" },
 ];
 
+const NEWS_ITEMS = [
+  { title: "Tech hiring picks up in Bengaluru", meta: "2h ago • 4,238 readers" },
+  { title: "Product teams lean harder into AI workflows", meta: "5h ago • 3,112 readers" },
+  { title: "Design leaders talk portfolio storytelling", meta: "8h ago • 1,829 readers" },
+  { title: "Remote roles remain strong in developer market", meta: "1d ago • 5,004 readers" },
+];
+
+const PUZZLES = [
+  { name: "Zip", hint: "Perfect streak: 7" },
+  { name: "Tango", hint: "New puzzle available" },
+];
+
 function cx(...parts) {
   return parts.filter(Boolean).join(" ");
 }
@@ -34,7 +60,7 @@ function uid() {
 function ReactionButtonLabel({ reactionId }) {
   const reaction = REACTIONS.find((r) => r.id === reactionId);
   if (!reaction) return "Like";
-  return `${reaction.emoji} ${reaction.label}`;
+  return reaction.label;
 }
 
 export default function Feed() {
@@ -136,7 +162,6 @@ export default function Feed() {
       setIsModalOpen(true);
       window.history.replaceState({}, document.title);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location?.state]);
 
   // Skeleton loading simulation
@@ -331,357 +356,454 @@ export default function Feed() {
   };
 
   return (
-    <div className="mx-auto max-w-6xl px-3 sm:px-4 pb-10">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        <aside className="hidden lg:block lg:col-span-3 space-y-4">
-          {/* Profile Card */}
-          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-            <div className="h-14 bg-gradient-to-r from-blue-600 to-sky-400" />
-            <div className="-mt-7 px-4 pb-4">
+    <div className="linkedin-page">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[225px_minmax(0,1fr)_300px]">
+        <aside className="hidden space-y-4 lg:block lg:sticky lg:top-[72px] lg:h-fit">
+          <div className="linkedin-surface overflow-hidden">
+            <div className="h-14 bg-[linear-gradient(135deg,#70b5f9,#0a66c2)]" />
+            <div className="px-3 pb-3">
               <img
                 src={viewer.avatar}
                 alt={viewer.name}
-                className="w-14 h-14 rounded-full border-4 border-white dark:border-gray-900"
+                className="-mt-8 h-[72px] w-[72px] rounded-full border-2 border-white object-cover"
               />
-              <div className="mt-2 font-semibold text-gray-900 dark:text-gray-100">
+              <Link
+                to={`/profile/${currentUser?.id || "1"}`}
+                className="mt-3 block text-base font-semibold text-[#191919] hover:underline"
+              >
                 {viewer.name}
-              </div>
-              <div className="text-sm text-gray-500 dark:text-gray-300">
-                {viewer.headline}
-              </div>
-              <div className="mt-3 text-xs text-gray-500 dark:text-gray-400">
-                Connections: {currentUser?.connections ?? 312}
-              </div>
+              </Link>
+              <p className="mt-1 text-xs leading-4 text-[#666666]">{viewer.headline}</p>
+            </div>
+
+            <div className="border-t border-gray-200 px-3 py-2 text-xs">
+              <button
+                type="button"
+                className="flex w-full items-center justify-between py-1.5 text-left text-[#666666] hover:bg-gray-50"
+              >
+                <span>Profile viewers</span>
+                <span className="font-semibold text-[#0a66c2]">129</span>
+              </button>
+              <button
+                type="button"
+                className="flex w-full items-center justify-between py-1.5 text-left text-[#666666] hover:bg-gray-50"
+              >
+                <span>Connections</span>
+                <span className="font-semibold text-[#0a66c2]">
+                  {currentUser?.connections ?? 312}
+                </span>
+              </button>
+            </div>
+
+            <div className="border-t border-gray-200 px-3 py-3">
+              <div className="text-xs text-[#666666]">Grow faster with Premium</div>
+              <button
+                type="button"
+                className="mt-1 text-left text-xs font-semibold text-[#915907] hover:underline"
+              >
+                Try Premium for Rs0
+              </button>
+            </div>
+
+            <div className="border-t border-gray-200 px-3 py-3">
+              <Link
+                to="/settings"
+                className="flex items-center gap-2 text-sm font-semibold text-[#191919] hover:underline"
+              >
+                <Bookmark className="h-4 w-4 text-[#666666]" />
+                Saved items
+              </Link>
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-            <div className="font-semibold text-gray-900 dark:text-gray-100 mb-3">Discover</div>
-            <div className="space-y-2">
-              <Link
-                to="/events"
-                className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-200 transition-colors"
-              >
-                <Calendar className="w-5 h-5 text-blue-600" />
-                <span className="text-sm font-medium">Events</span>
-              </Link>
-              <Link
-                to="/analytics"
-                className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-200 transition-colors"
-              >
-                <svg className="w-5 h-5 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M3 3v18h18" />
-                  <path d="M18 17V9" />
-                  <path d="M13 17V5" />
-                  <path d="M8 17v-3" />
-                </svg>
-                <span className="text-sm font-medium">Analytics</span>
-              </Link>
-            </div>
+          <div className="linkedin-surface p-3 text-sm">
+            <Link to="/events" className="block py-1 font-semibold text-[#0a66c2] hover:underline">
+              Events
+            </Link>
+            <Link
+              to="/analytics"
+              className="mt-1 block py-1 font-semibold text-[#0a66c2] hover:underline"
+            >
+              Analytics
+            </Link>
+            <Link
+              to="/network"
+              className="mt-1 block py-1 font-semibold text-[#0a66c2] hover:underline"
+            >
+              Groups
+            </Link>
           </div>
         </aside>
 
-        <section className="lg:col-span-6 space-y-4">
-          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+        <section className="space-y-4">
+          <div className="linkedin-surface p-4">
             <div className="flex items-start gap-3">
-              <img src={viewer.avatar} alt={viewer.name} className="w-12 h-12 rounded-full" />
+              <img src={viewer.avatar} alt={viewer.name} className="h-12 w-12 rounded-full" />
               <button
                 type="button"
                 onClick={() => setIsModalOpen(true)}
-                className="flex-1 text-left border border-gray-300 dark:border-gray-700 rounded-full px-4 py-2.5 text-gray-600 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800"
+                className="flex-1 rounded-full border border-gray-400 px-4 py-2.5 text-left text-sm font-medium text-[#666666] transition hover:bg-gray-50"
               >
                 Start a post
               </button>
             </div>
-            <div className="hidden sm:grid mt-3 grid-cols-4 gap-2 text-sm">
+
+            <div className="mt-3 grid grid-cols-2 gap-1 sm:grid-cols-4">
               {[
-                { label: "Photo", color: "text-blue-600", icon: "🖼️" },
-                { label: "Video", color: "text-green-600", icon: "🎥" },
-                { label: "Document", color: "text-orange-600", icon: "📄" },
-                { label: "Emoji", color: "text-yellow-600", icon: "😊" },
-              ].map((b) => (
+                { label: "Media", icon: Image, color: "text-[#378fe9]" },
+                { label: "Video", icon: Video, color: "text-[#5f9b41]" },
+                { label: "Event", icon: Calendar, color: "text-[#c37d16]" },
+                { label: "Write article", icon: Newspaper, color: "text-[#e06847]" },
+              ].map((item) => (
                 <button
-                  key={b.label}
+                  key={item.label}
                   type="button"
                   onClick={() => setIsModalOpen(true)}
-                  className="flex items-center justify-center gap-2 py-2 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-200"
+                  className="flex items-center justify-center gap-2 rounded-md py-2 text-sm font-medium text-[#666666] hover:bg-gray-50"
                 >
-                  <span className={cx("text-base", b.color)}>{b.icon}</span>
-                  <span className="hidden sm:inline">{b.label}</span>
+                  <item.icon className={cx("h-5 w-5", item.color)} />
+                  <span>{item.label}</span>
                 </button>
               ))}
             </div>
           </div>
 
-          {/* Skeleton Loading */}
+          <div className="flex items-center gap-3 px-1 text-xs text-[#666666]">
+            <div className="h-px flex-1 bg-gray-300" />
+            <button type="button" className="flex items-center gap-1">
+              <span>Sort by:</span>
+              <span className="font-semibold text-[#191919]">Top</span>
+              <ChevronDown className="h-3.5 w-3.5" />
+            </button>
+          </div>
+
           {isLoading && <SkeletonList count={3} type="post" />}
 
-          {/* Posts */}
-          {!isLoading && posts.map((post, index) => {
-            const isLiked = likedPosts.has(post.id);
-            const reactionId = reactionByPostId[post.id];
-            const likeCount = post.baseLikeCount + (isLiked ? 1 : 0);
-            const showComments = Boolean(showCommentsByPostId[post.id]);
-            const isBouncing = bouncingLikePostId === post.id;
-            const reactionOpen = openReactionForPostId === post.id;
-            const repostMenuOpen = repostMenuPostId === post.id;
+          {!isLoading &&
+            posts.map((post, index) => {
+              const isLiked = likedPosts.has(post.id);
+              const reactionId = reactionByPostId[post.id];
+              const likeCount = post.baseLikeCount + (isLiked ? 1 : 0);
+              const showComments = Boolean(showCommentsByPostId[post.id]);
+              const isBouncing = bouncingLikePostId === post.id;
+              const reactionOpen = openReactionForPostId === post.id;
+              const repostMenuOpen = repostMenuPostId === post.id;
 
-            return (
-              <AnimatedPost key={post.id} index={index}>
-              <article
-                className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden"
-              >
-                <div className="p-4">
-                  <div className="flex items-start gap-3">
-                    <img
-                      src={post.author.avatar}
-                      alt={post.author.name}
-                      className="w-12 h-12 rounded-full"
-                    />
-                    <div className="min-w-0 flex-1">
-                      <div className="flex items-center justify-between gap-2">
-                        <div className="min-w-0">
-                          <div className="font-semibold text-gray-900 dark:text-gray-100 truncate">
-                            {post.author.name}
-                          </div>
-                          <div className="text-sm text-gray-500 dark:text-gray-300 truncate">
-                            {post.author.headline}
-                          </div>
-                          <div className="text-xs text-gray-500 dark:text-gray-400">
-                            {post.timeLabel} · {post.audience}
+              return (
+                <AnimatedPost key={post.id} index={index}>
+                  <article className="linkedin-surface overflow-hidden">
+                    <div className="p-4">
+                      <div className="flex items-start gap-3">
+                        <img
+                          src={post.author.avatar}
+                          alt={post.author.name}
+                          className="h-12 w-12 rounded-full object-cover"
+                        />
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-start justify-between gap-3">
+                            <div className="min-w-0">
+                              <div className="truncate text-sm font-semibold text-[#191919]">
+                                {post.author.name}
+                              </div>
+                              <div className="truncate text-xs text-[#666666]">
+                                {post.author.headline}
+                              </div>
+                              <div className="mt-0.5 text-xs text-[#666666]">
+                                {post.timeLabel} • {post.audience}
+                              </div>
+                            </div>
+                            <button
+                              type="button"
+                              className="rounded-full px-2 py-1 text-sm font-semibold text-[#0a66c2] hover:bg-[#edf3f8]"
+                            >
+                              + Follow
+                            </button>
                           </div>
                         </div>
+                      </div>
+
+                      <div className="mt-3 whitespace-pre-wrap text-[15px] leading-6 text-[#191919]">
+                        {post.text}
+                      </div>
+
+                      <div className="mt-4 flex items-center justify-between text-xs text-[#666666]">
+                        <div className="flex items-center gap-2">
+                          <span className="inline-flex items-center gap-1 rounded-full bg-[#edf3f8] px-2 py-0.5 text-[11px] text-[#191919]">
+                            <span>👍</span>
+                            <span>❤️</span>
+                          </span>
+                          <span>
+                            {isLiked
+                              ? `You and ${post.baseLikeCount} others`
+                              : `${likeCount} reactions`}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <button
+                            type="button"
+                            onClick={() => toggleComments(post.id)}
+                            className="hover:underline"
+                          >
+                            {post.comments.length} comments
+                          </button>
+                          <span>{post.repostCount} reposts</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="border-t border-gray-200 px-2">
+                      <div className="grid grid-cols-4">
+                        <div className="relative">
+                          <button
+                            type="button"
+                            onMouseEnter={() => openReactionPickerWithDelay(post.id)}
+                            onMouseLeave={cancelReactionHover}
+                            onClick={() => toggleLike(post.id)}
+                            className={cx(
+                              "flex w-full items-center justify-center gap-2 rounded-md py-3 text-sm font-semibold hover:bg-gray-50",
+                              isLiked ? "text-[#0a66c2]" : "text-[#666666]"
+                            )}
+                          >
+                            <ThumbsUp
+                              className={cx(
+                                "h-4 w-4 transition-transform duration-150",
+                                isBouncing && "scale-125"
+                              )}
+                            />
+                            <span className="hidden sm:inline">
+                              <ReactionButtonLabel reactionId={reactionId} />
+                            </span>
+                          </button>
+
+                          {reactionOpen && (
+                            <div
+                              onMouseEnter={() => {
+                                if (reactionHoverTimerRef.current) {
+                                  window.clearTimeout(reactionHoverTimerRef.current);
+                                  reactionHoverTimerRef.current = null;
+                                }
+                                setOpenReactionForPostId(post.id);
+                              }}
+                              onMouseLeave={cancelReactionHover}
+                              className="absolute left-2 -top-14 z-20 flex items-center gap-1 rounded-full border border-gray-200 bg-white px-2 py-1 shadow-lg"
+                            >
+                              {REACTIONS.map((reaction) => (
+                                <button
+                                  key={reaction.id}
+                                  type="button"
+                                  onClick={() => {
+                                    setLikeBounce(post.id);
+                                    setReaction(post.id, reaction.id);
+                                    setOpenReactionForPostId(null);
+                                  }}
+                                  className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-gray-100"
+                                  title={reaction.label}
+                                >
+                                  <span className="text-lg">{reaction.emoji}</span>
+                                </button>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+
                         <button
                           type="button"
-                          className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-200"
+                          onClick={() => toggleComments(post.id)}
+                          className="flex w-full items-center justify-center gap-2 rounded-md py-3 text-sm font-semibold text-[#666666] hover:bg-gray-50"
                         >
-                          ⋯
+                          <MessageCircle className="h-4 w-4" />
+                          <span className="hidden sm:inline">Comment</span>
+                        </button>
+
+                        <div className="relative">
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setRepostMenuPostId((cur) => (cur === post.id ? null : post.id))
+                            }
+                            className="flex w-full items-center justify-center gap-2 rounded-md py-3 text-sm font-semibold text-[#666666] hover:bg-gray-50"
+                          >
+                            <Repeat2 className="h-4 w-4" />
+                            <span className="hidden sm:inline">Repost</span>
+                          </button>
+
+                          {repostMenuOpen && (
+                            <div className="absolute right-2 top-12 z-20 w-44 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-lg">
+                              <button
+                                type="button"
+                                onClick={() => incrementRepost(post.id)}
+                                className="w-full px-3 py-2 text-left text-sm text-[#191919] hover:bg-gray-50"
+                              >
+                                Repost
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => shareInPost(post.id)}
+                                className="w-full px-3 py-2 text-left text-sm text-[#191919] hover:bg-gray-50"
+                              >
+                                Share in a post
+                              </button>
+                            </div>
+                          )}
+                        </div>
+
+                        <button
+                          type="button"
+                          className="flex w-full items-center justify-center gap-2 rounded-md py-3 text-sm font-semibold text-[#666666] hover:bg-gray-50"
+                        >
+                          <Send className="h-4 w-4" />
+                          <span className="hidden sm:inline">Send</span>
                         </button>
                       </div>
                     </div>
-                  </div>
 
-                  <div className="mt-3 text-gray-900 dark:text-gray-100 whitespace-pre-wrap">
-                    {post.text}
-                  </div>
-
-                  <div className="mt-3 flex items-center justify-between text-sm text-gray-500 dark:text-gray-300">
-                    <div>
-                      {isLiked ? `You and ${post.baseLikeCount} others` : `${likeCount} likes`}
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <button
-                        type="button"
-                        onClick={() => toggleComments(post.id)}
-                        className="hover:underline"
-                      >
-                        {post.comments.length} comments
-                      </button>
-                      <div>{post.repostCount} reposts</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="border-t border-gray-200 dark:border-gray-700 px-2">
-                  <div className="grid grid-cols-4">
-                    <div className="relative">
-                      <button
-                        type="button"
-                        onMouseEnter={() => openReactionPickerWithDelay(post.id)}
-                        onMouseLeave={cancelReactionHover}
-                        onClick={() => toggleLike(post.id)}
-                        className={cx(
-                          "w-full flex items-center justify-center gap-2 py-3 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 text-sm font-medium",
-                          isLiked ? "text-blue-700" : "text-gray-600 dark:text-gray-200"
-                        )}
-                      >
-                        <span
-                          className={cx(
-                            "inline-flex items-center justify-center transition-transform duration-150",
-                            isBouncing && "scale-125"
-                          )}
-                        >
-                          👍
-                        </span>
-                        <span className="hidden sm:inline">
-                          <ReactionButtonLabel reactionId={reactionId} />
-                        </span>
-                      </button>
-
-                      {reactionOpen && (
-                        <div
-                          onMouseEnter={() => {
-                            if (reactionHoverTimerRef.current) {
-                              window.clearTimeout(reactionHoverTimerRef.current);
-                              reactionHoverTimerRef.current = null;
-                            }
-                            setOpenReactionForPostId(post.id);
-                          }}
-                          onMouseLeave={cancelReactionHover}
-                          className="absolute left-2 -top-14 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow-lg rounded-full px-2 py-1 flex items-center gap-1 z-20"
-                        >
-                          {REACTIONS.map((r) => (
-                            <button
-                              key={r.id}
-                              type="button"
-                              onClick={() => {
-                                setLikeBounce(post.id);
-                                setReaction(post.id, r.id);
-                                setOpenReactionForPostId(null);
-                              }}
-                              className="w-9 h-9 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 flex items-center justify-center"
-                              title={r.label}
-                            >
-                              <span className="text-lg">{r.emoji}</span>
-                            </button>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-
-                    <button
-                      type="button"
-                      onClick={() => toggleComments(post.id)}
-                      className="w-full flex items-center justify-center gap-2 py-3 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 text-sm font-medium text-gray-600 dark:text-gray-200"
-                    >
-                      💬 <span className="hidden sm:inline">Comment</span>
-                    </button>
-
-                    <div className="relative">
-                      <button
-                        type="button"
-                        onClick={() =>
-                          setRepostMenuPostId((cur) => (cur === post.id ? null : post.id))
-                        }
-                        className="w-full flex items-center justify-center gap-2 py-3 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 text-sm font-medium text-gray-600 dark:text-gray-200"
-                      >
-                        🔁 <span className="hidden sm:inline">Repost</span>
-                      </button>
-                      {repostMenuOpen && (
-                        <div className="absolute right-2 top-12 w-44 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow-lg rounded-lg overflow-hidden z-20">
-                          <button
-                            type="button"
-                            onClick={() => incrementRepost(post.id)}
-                            className="w-full text-left px-3 py-2 hover:bg-gray-50 dark:hover:bg-gray-800 text-sm text-gray-700 dark:text-gray-100"
-                          >
-                            Repost
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => shareInPost(post.id)}
-                            className="w-full text-left px-3 py-2 hover:bg-gray-50 dark:hover:bg-gray-800 text-sm text-gray-700 dark:text-gray-100"
-                          >
-                            Share in a post
-                          </button>
-                        </div>
-                      )}
-                    </div>
-
-                    <button
-                      type="button"
-                      className="w-full flex items-center justify-center gap-2 py-3 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 text-sm font-medium text-gray-600 dark:text-gray-200"
-                    >
-                      ✉️ <span className="hidden sm:inline">Send</span>
-                    </button>
-                  </div>
-                </div>
-
-                {showComments && (
-                  <div className="border-t border-gray-200 dark:border-gray-700 p-4 space-y-4">
-                    <div className="space-y-3">
-                      {post.comments.map((c) => (
-                        <div key={c.id} className="flex items-start gap-3">
-                          <img
-                            src={c.author.avatar}
-                            alt={c.author.name}
-                            className="w-9 h-9 rounded-full"
-                          />
-                          <div className="flex-1">
-                            <div className="bg-gray-100 dark:bg-gray-800 rounded-2xl px-3 py-2">
-                              <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                                {c.author.name}
-                              </div>
-                              <div className="text-sm text-gray-800 dark:text-gray-200">
-                                {c.text}
+                    {showComments && (
+                      <div className="border-t border-gray-200 p-4">
+                        <div className="space-y-3">
+                          {post.comments.map((comment) => (
+                            <div key={comment.id} className="flex items-start gap-3">
+                              <img
+                                src={comment.author.avatar}
+                                alt={comment.author.name}
+                                className="h-9 w-9 rounded-full object-cover"
+                              />
+                              <div className="flex-1">
+                                <div className="rounded-[18px] bg-[#f3f2ef] px-3 py-2">
+                                  <div className="text-sm font-semibold text-[#191919]">
+                                    {comment.author.name}
+                                  </div>
+                                  <div className="text-sm text-[#191919]">{comment.text}</div>
+                                </div>
+                                <div className="mt-1 flex items-center gap-3 pl-3 text-xs text-[#666666]">
+                                  <button
+                                    type="button"
+                                    onClick={() => toggleCommentLike(post.id, comment.id)}
+                                    className={cx(comment.liked && "text-[#0a66c2]")}
+                                  >
+                                    Like
+                                  </button>
+                                  <button
+                                    type="button"
+                                    onClick={() =>
+                                      setCommentDraftByPostId((prev) => ({
+                                        ...prev,
+                                        [post.id]: `${(prev[post.id] || "").trim()} @${comment.author.name} `,
+                                      }))
+                                    }
+                                  >
+                                    Reply
+                                  </button>
+                                </div>
                               </div>
                             </div>
-                            <div className="mt-1 flex items-center gap-3 text-xs text-gray-500 dark:text-gray-300">
-                              <button
-                                type="button"
-                                onClick={() => toggleCommentLike(post.id, c.id)}
-                                className={cx("hover:underline", c.liked && "text-blue-700")}
-                              >
-                                Like
-                              </button>
-                              <button
-                                type="button"
-                                className="hover:underline"
-                                onClick={() =>
+                          ))}
+                        </div>
+
+                        <div className="mt-4 flex items-start gap-3">
+                          <img
+                            src={viewer.avatar}
+                            alt={viewer.name}
+                            className="h-9 w-9 rounded-full object-cover"
+                          />
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2">
+                              <input
+                                value={commentDraftByPostId[post.id] || ""}
+                                onChange={(event) =>
                                   setCommentDraftByPostId((prev) => ({
                                     ...prev,
-                                    [post.id]: `${(prev[post.id] || "").trim()} @${c.author.name} `,
+                                    [post.id]: event.target.value.slice(0, 3000),
                                   }))
                                 }
+                                placeholder="Add a comment..."
+                                className="h-10 flex-1 rounded-full border border-gray-400 bg-white px-4 text-sm outline-none transition focus:border-[#0a66c2] focus:ring-1 focus:ring-[#0a66c2]"
+                              />
+                              <button
+                                type="button"
+                                onClick={() => submitComment(post.id)}
+                                disabled={!((commentDraftByPostId[post.id] || "").trim().length > 0)}
+                                className={cx(
+                                  "rounded-full px-4 py-2 text-sm font-semibold",
+                                  (commentDraftByPostId[post.id] || "").trim().length > 0
+                                    ? "bg-[#0a66c2] text-white hover:bg-[#004182]"
+                                    : "cursor-not-allowed bg-gray-200 text-gray-500"
+                                )}
                               >
-                                Reply
+                                Post
                               </button>
                             </div>
                           </div>
                         </div>
-                      ))}
-                    </div>
-
-                    <div className="flex items-start gap-3">
-                      <img
-                        src={viewer.avatar}
-                        alt={viewer.name}
-                        className="w-9 h-9 rounded-full"
-                      />
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2">
-                          <input
-                            value={commentDraftByPostId[post.id] || ""}
-                            onChange={(e) =>
-                              setCommentDraftByPostId((prev) => ({
-                                ...prev,
-                                [post.id]: e.target.value.slice(0, 3000),
-                              }))
-                            }
-                            placeholder="Add a comment…"
-                            className="flex-1 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 rounded-full px-4 py-2 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                          />
-                          <button
-                            type="button"
-                            onClick={() => submitComment(post.id)}
-                            disabled={!((commentDraftByPostId[post.id] || "").trim().length > 0)}
-                            className={cx(
-                              "px-3 py-2 rounded-full text-sm font-semibold",
-                              (commentDraftByPostId[post.id] || "").trim().length > 0
-                                ? "bg-blue-600 text-white hover:bg-blue-700"
-                                : "bg-gray-200 text-gray-500 dark:bg-gray-800 dark:text-gray-500 cursor-not-allowed"
-                            )}
-                          >
-                            Post
-                          </button>
-                        </div>
                       </div>
-                    </div>
-                  </div>
-                )}
-              </article>
-              </AnimatedPost>
-            );
-          })}
+                    )}
+                  </article>
+                </AnimatedPost>
+              );
+            })}
         </section>
 
-        <aside className="hidden lg:block lg:col-span-3">
-          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-            <div className="font-semibold text-gray-900 dark:text-gray-100">Trending</div>
-            <div className="mt-3 space-y-2 text-sm text-gray-600 dark:text-gray-200">
-              <div className="hover:underline cursor-pointer">#react</div>
-              <div className="hover:underline cursor-pointer">#design</div>
-              <div className="hover:underline cursor-pointer">#careers</div>
+        <aside className="hidden space-y-4 lg:block lg:sticky lg:top-[72px] lg:h-fit">
+          <div className="linkedin-surface p-4">
+            <div className="flex items-start justify-between gap-3">
+              <h2 className="text-base font-semibold text-[#191919]">LinkedIn News</h2>
+              <Info className="h-4 w-4 text-[#666666]" />
+            </div>
+            <div className="mt-4 space-y-4">
+              {NEWS_ITEMS.map((item) => (
+                <button
+                  key={item.title}
+                  type="button"
+                  className="block w-full text-left hover:bg-gray-50"
+                >
+                  <div className="text-sm font-semibold text-[#191919]">{item.title}</div>
+                  <div className="mt-1 text-xs text-[#666666]">{item.meta}</div>
+                </button>
+              ))}
+            </div>
+            <button
+              type="button"
+              className="mt-4 flex items-center gap-1 text-sm font-semibold text-[#666666] hover:text-[#191919]"
+            >
+              Show more
+              <ChevronDown className="h-4 w-4" />
+            </button>
+          </div>
+
+          <div className="linkedin-surface p-4">
+            <div className="text-base font-semibold text-[#191919]">Today's puzzles</div>
+            <div className="mt-3 space-y-3">
+              {PUZZLES.map((item) => (
+                <button
+                  key={item.name}
+                  type="button"
+                  className="flex w-full items-center justify-between rounded-lg px-2 py-2 text-left hover:bg-gray-50"
+                >
+                  <span>
+                    <div className="text-sm font-semibold text-[#191919]">{item.name}</div>
+                    <div className="text-xs text-[#666666]">{item.hint}</div>
+                  </span>
+                  <ChevronDown className="-rotate-90 h-4 w-4 text-[#666666]" />
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="linkedin-surface p-4">
+            <div className="text-xs uppercase tracking-[0.12em] text-[#666666]">
+              Promoted
+            </div>
+            <div className="mt-2 text-sm leading-5 text-[#191919]">
+              Land more interviews with sharper profile insights and easier networking.
+            </div>
+            <button
+              type="button"
+              className="mt-4 rounded-full border border-[#0a66c2] px-4 py-2 text-sm font-semibold text-[#0a66c2]"
+            >
+              Try Premium
+            </button>
+            <div className="mt-4 flex items-center gap-2 text-xs text-[#666666]">
+              <BarChart3 className="h-4 w-4" />
+              Track profile views, search appearances, and hiring momentum.
             </div>
           </div>
         </aside>
@@ -864,42 +986,33 @@ export default function Feed() {
               </div>
             )}
 
-            <div className="flex items-center justify-between px-4 py-3 border-t border-gray-200 dark:border-gray-700">
-              <div className="flex items-center gap-2">
+            <div className="flex items-center justify-between border-t border-gray-200 px-4 py-3">
+              <div className="flex items-center gap-1">
                 {[
-                  { label: "Photo", icon: "🖼️" },
-                  { label: "Video", icon: "🎥" },
-                  { label: "Document", icon: "📄" },
-                  { label: "Emoji", icon: "😊" },
-                ].map((t) => (
+                  { label: "Add photo", icon: Image, color: "text-[#378fe9]" },
+                  { label: "Add video", icon: Video, color: "text-[#5f9b41]" },
+                  { label: "Create event", icon: Calendar, color: "text-[#c37d16]" },
+                  { label: "Write article", icon: Newspaper, color: "text-[#e06847]" },
+                ].map((item) => (
                   <button
-                    key={t.label}
+                    key={item.label}
                     type="button"
-                    onClick={() => (t.label === "Emoji" ? setShowEmoji(true) : null)}
-                    className="w-10 h-10 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 flex items-center justify-center"
-                    title={t.label}
+                    className="flex h-10 w-10 items-center justify-center rounded-full hover:bg-gray-100"
+                    title={item.label}
                   >
-                    <span className="text-lg">{t.icon}</span>
+                    <item.icon className={cx("h-5 w-5", item.color)} />
                   </button>
                 ))}
-                <button
-                  type="button"
-                  onClick={() => setShowAiPanel(true)}
-                  className="flex items-center gap-1.5 px-3 py-2 rounded-full bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-900/30 dark:to-blue-900/30 text-purple-700 dark:text-purple-300 text-sm font-medium hover:from-purple-200 hover:to-blue-200 dark:hover:from-purple-900/40 dark:hover:to-blue-900/40 transition-colors"
-                >
-                  <Sparkles className="w-4 h-4" />
-                  Write with AI
-                </button>
               </div>
               <button
                 type="button"
                 disabled={!canPost}
                 onClick={submitPost}
                 className={cx(
-                  "px-5 py-2 rounded-full text-sm font-semibold",
+                  "rounded-full px-5 py-2 text-sm font-semibold",
                   canPost
-                    ? "bg-blue-600 text-white hover:bg-blue-700"
-                    : "bg-gray-200 text-gray-500 dark:bg-gray-800 dark:text-gray-500 cursor-not-allowed"
+                    ? "bg-[#0a66c2] text-white hover:bg-[#004182]"
+                    : "cursor-not-allowed bg-gray-200 text-gray-500"
                 )}
               >
                 Post

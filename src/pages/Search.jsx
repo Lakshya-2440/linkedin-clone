@@ -404,10 +404,10 @@ export default function Search() {
   };
 
   return (
-    <div className="max-w-[1200px] mx-auto px-4 py-4">
+    <div className="linkedin-page-wide">
       {/* Top Bar */}
-      <div className="mb-6">
-        <h1 className="text-xl font-semibold text-gray-900 mb-4">
+      <div className="linkedin-surface mb-6 p-4">
+        <h1 className="mb-4 text-xl font-semibold text-[#191919]">
           Results for &ldquo;{query}&rdquo;
         </h1>
         
@@ -852,4 +852,3 @@ function CompanyCard({ company, query }) {
     </div>
   );
 }
-
