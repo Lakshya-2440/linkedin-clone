@@ -9,9 +9,9 @@ function AppLayout() {
   const location = useLocation();
   const hideNavbar = ["/", "/signup"].includes(location.pathname);
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
+    <div className="min-h-screen bg-[var(--li-bg)] text-[var(--li-text)]">
       {!hideNavbar && <Navbar />}
-      <main className="pt-4 pb-20 md:pb-0">
+      <main className="pb-20 md:pb-0">
         <AppRoutes />
       </main>
     </div>

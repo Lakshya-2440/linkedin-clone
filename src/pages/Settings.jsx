@@ -226,7 +226,7 @@ export default function Settings() {
   const [showPremiumModal, setShowPremiumModal] = useState(false);
 
   return (
-    <div className="max-w-[1200px] mx-auto px-4 py-6">
+    <div className="linkedin-page-wide">
       <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6">
         {/* Left Sidebar */}
         <aside className="space-y-4">
@@ -298,7 +298,6 @@ function AccountPreferences({ user }) {
     language: "English",
   });
   const [displayName, setDisplayName] = useState("Demo User");
-  const [isEditing, setIsEditing] = useState(false);
 
   const languages = ["English", "Hindi", "Spanish", "French", "German", "Chinese"];
 

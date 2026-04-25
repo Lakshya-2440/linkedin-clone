@@ -4,12 +4,30 @@
 
 @layer base {
   :root {
-    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-      sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    --li-bg: #f4f2ee;
+    --li-surface: #ffffff;
+    --li-surface-alt: #edf3f8;
+    --li-border: #d7dce2;
+    --li-text: #191919;
+    --li-muted: #5e5e5e;
+    --li-link: #0a66c2;
+    --li-nav: rgba(255, 255, 255, 0.96);
+  }
+
+  .dark {
+    --li-bg: #161b22;
+    --li-surface: #1f2630;
+    --li-surface-alt: #27303c;
+    --li-border: #3b4756;
+    --li-text: #f3f2ef;
+    --li-muted: #a6b0bb;
+    --li-link: #70b5f9;
+    --li-nav: rgba(22, 27, 34, 0.94);
   }
 
   * {
@@ -24,6 +42,8 @@
 
   body {
     margin: 0;
+    background: var(--li-bg);
+    color: var(--li-text);
   }
 
   button,
@@ -32,6 +52,67 @@
   select {
     font: inherit;
   }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img {
+    display: block;
+  }
+}
+
+.linkedin-page {
+  width: min(1128px, 100%);
+  margin: 0 auto;
+  padding: 1.5rem 1rem 2.5rem;
+}
+
+.linkedin-page-wide {
+  width: min(1200px, 100%);
+  margin: 0 auto;
+  padding: 1.5rem 1rem 2.5rem;
+}
+
+.linkedin-surface {
+  background: var(--li-surface);
+  border: 1px solid var(--li-border);
+  border-radius: 0.75rem;
+}
+
+.linkedin-input {
+  background: var(--li-surface-alt);
+  border: 1px solid transparent;
+  color: var(--li-text);
+  transition: border-color 0.18s ease, background-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.linkedin-input::placeholder {
+  color: var(--li-muted);
+}
+
+.linkedin-input:focus {
+  outline: none;
+  border-color: var(--li-link);
+  background: var(--li-surface);
+  box-shadow: 0 0 0 1px var(--li-link);
+}
+
+.linkedin-link {
+  color: var(--li-link);
+  font-weight: 600;
+}
+
+.linkedin-link:hover {
+  text-decoration: underline;
+}
+
+.linkedin-nav {
+  background: var(--li-nav);
+  border-bottom: 1px solid var(--li-border);
+  backdrop-filter: blur(12px);
 }
 
 /* Modal animations */

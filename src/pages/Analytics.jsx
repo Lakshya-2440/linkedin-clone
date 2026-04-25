@@ -166,8 +166,8 @@ export default function Analytics() {
   const totalViews = useMemo(() => VIEW_DATA.reduce((sum, d) => sum + d.views, 0), []);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-6 pb-20">
-      <div className="mb-6">
+    <div className="linkedin-page">
+      <div className="linkedin-surface mb-6 p-5">
         <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
           Who viewed your profile
         </h1>

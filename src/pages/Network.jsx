@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import {
   Users,
   UserPlus,
@@ -336,9 +336,9 @@ export default function Network() {
   const schools = [...new Set(PEOPLE_DATA.map((p) => p.school))];
 
   return (
-    <div className="max-w-[1200px] mx-auto px-4 py-4 grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6">
+    <div className="linkedin-page-wide grid grid-cols-1 gap-6 lg:grid-cols-[280px_1fr]">
       {/* LEFT SIDEBAR */}
-      <aside className="lg:sticky lg:top-20 h-fit">
+      <aside className="lg:sticky lg:top-[72px] h-fit">
         <NetworkSidebar
           counts={NETWORK_COUNTS}
           selectedFilter={selectedFilter}
@@ -348,9 +348,16 @@ export default function Network() {
 
       {/* MAIN CONTENT */}
       <main className="flex flex-col gap-4">
+        <div className="linkedin-surface p-4">
+          <h1 className="text-2xl font-semibold text-[#191919]">My Network</h1>
+          <p className="mt-1 text-sm text-[#666666]">
+            Track invitations, grow connections, and discover people you may know.
+          </p>
+        </div>
+
         {/* Tabs */}
-        <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
-          <div className="flex border-b border-gray-200 dark:border-gray-700">
+        <div className="linkedin-surface">
+          <div className="flex border-b border-gray-200">
             <TabButton
               active={activeTab === "invitations"}
               onClick={() => setActiveTab("invitations")}
@@ -472,9 +479,9 @@ function NetworkSidebar({ counts, selectedFilter, onFilterChange }) {
   ];
 
   return (
-    <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
-      <div className="p-4 border-b border-gray-200 dark:border-gray-700">
-        <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100">
+    <div className="linkedin-surface overflow-hidden">
+      <div className="border-b border-gray-200 p-4">
+        <h2 className="text-base font-semibold text-[#191919]">
           Manage my network
         </h2>
       </div>
@@ -485,10 +492,10 @@ function NetworkSidebar({ counts, selectedFilter, onFilterChange }) {
             <button
               key={item.id}
               onClick={() => onFilterChange(item.id)}
-              className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm transition-colors ${
+              className={`w-full flex items-center justify-between rounded-lg px-3 py-2.5 text-sm transition-colors ${
                 selectedFilter === item.id
-                  ? "bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400"
-                  : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
+                  ? "bg-[#edf3f8] text-[#0a66c2]"
+                  : "text-[#191919] hover:bg-gray-50"
               }`}
             >
               <div className="flex items-center gap-3">
@@ -496,8 +503,8 @@ function NetworkSidebar({ counts, selectedFilter, onFilterChange }) {
                 <span>{item.label}</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-gray-400 dark:text-gray-500">{item.count}</span>
-                <ChevronRight className="w-4 h-4 text-gray-400 dark:text-gray-500" />
+                <span className="text-[#666666]">{item.count}</span>
+                <ChevronRight className="w-4 h-4 text-[#666666]" />
               </div>
             </button>
           );
@@ -512,7 +519,7 @@ function TabButton({ children, active, onClick, count }) {
     <button
       onClick={onClick}
       className={`flex-1 px-6 py-4 text-sm font-semibold transition-colors relative ${
-        active ? "text-blue-600 dark:text-blue-400" : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100"
+        active ? "text-[#057642]" : "text-[#666666] hover:text-[#191919]"
       }`}
     >
       <span className="flex items-center justify-center gap-2">
@@ -524,7 +531,7 @@ function TabButton({ children, active, onClick, count }) {
         )}
       </span>
       {active && (
-        <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 dark:bg-blue-400" />
+        <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#057642]" />
       )}
     </button>
   );
@@ -726,4 +733,3 @@ function FilterDropdown({ label, value, onChange, options }) {
     </div>
   );
 }
-
